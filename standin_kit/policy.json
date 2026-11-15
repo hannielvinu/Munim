@@ -1,0 +1,34 @@
+{
+  "margin_basis": "cost",
+  "discount_basis": "list_price",
+  "categories": {
+    "Grains": {
+      "min_margin_bps": 1200,
+      "max_discount_bps": 1200
+    },
+    "Pulses": {
+      "min_margin_bps": 1500,
+      "max_discount_bps": 1000
+    },
+    "Oils": {
+      "min_margin_bps": 800,
+      "max_discount_bps": 800
+    },
+    "Pantry": {
+      "min_margin_bps": 1800,
+      "max_discount_bps": 1500
+    },
+    "Beverages": {
+      "min_margin_bps": 2000,
+      "max_discount_bps": 1200
+    },
+    "Snacks": {
+      "min_margin_bps": 2500,
+      "max_discount_bps": 1800
+    },
+    "Care": {
+      "min_margin_bps": 2200,
+      "max_discount_bps": 1500
+    }
+  }
+}

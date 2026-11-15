@@ -1,0 +1,50 @@
+id,name,category,cost,list_price,stock
+g01,Whole wheat atta,Grains,4680,7200,25
+g02,Basmati rice,Grains,7085,10900,26
+g03,Sona masoori rice,Grains,9490,14600,27
+g04,Poha,Grains,11895,18300,28
+g05,Rava,Grains,14300,22000,29
+g06,Dalia,Grains,16705,25700,30
+g07,Maida,Grains,19110,29400,31
+g08,Toor dal,Pulses,21515,33100,32
+g09,Moong dal,Pulses,23920,36800,33
+g10,Masoor dal,Pulses,2925,4500,34
+g11,Chana dal,Pulses,5330,8200,2
+g12,Kabuli chana,Pulses,7735,11900,36
+g13,Rajma,Pulses,10140,15600,37
+g14,Urad dal,Pulses,12545,19300,38
+g15,Sunflower oil,Oils,14950,23000,24
+g16,Mustard oil,Oils,17355,26700,25
+g17,Groundnut oil,Oils,19760,30400,0
+g18,Coconut oil,Oils,22165,34100,27
+g19,Rice bran oil,Oils,24570,37800,28
+g20,Sesame oil,Oils,3575,5500,29
+g21,Ghee,Oils,5980,9200,30
+g22,Sugar,Pantry,8385,12900,2
+g23,Salt,Pantry,10790,16600,32
+g24,Turmeric,Pantry,13195,20300,33
+g25,Chilli powder,Pantry,15600,24000,34
+g26,Cumin,Pantry,18005,27700,35
+g27,Coriander powder,Pantry,20410,31400,36
+g28,Jaggery,Pantry,22815,35100,37
+g29,Assam tea,Beverages,25220,38800,38
+g30,Filter coffee,Beverages,4225,6500,24
+g31,Instant coffee,Beverages,6630,10200,25
+g32,Green tea,Beverages,9035,13900,26
+g33,Cocoa,Beverages,11440,17600,2
+g34,Malt drink,Beverages,13845,21300,0
+g35,Milk powder,Beverages,16250,25000,29
+g36,Marie biscuits,Snacks,18655,28700,30
+g37,Glucose biscuits,Snacks,21060,32400,31
+g38,Cream biscuits,Snacks,23465,36100,32
+g39,Rusk,Snacks,2470,3800,33
+g40,Namkeen,Snacks,4875,7500,34
+g41,Peanuts,Snacks,7280,11200,35
+g42,Popcorn,Snacks,9685,14900,36
+g43,Bath soap,Care,12090,18600,37
+g44,Detergent,Care,14495,22300,2
+g45,Dishwash bar,Care,16900,26000,24
+g46,Toothpaste,Care,19305,29700,25
+g47,Shampoo,Care,21710,33400,26
+g48,Handwash,Care,24115,37100,27
+g49,Floor cleaner,Care,3120,4800,28

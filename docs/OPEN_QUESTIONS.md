@@ -1,6 +1,6 @@
 # Required inputs before implementation
 
-Status: blocked before Prompt 0. The supplied GitHub repository was empty when cloned. No starter kit or Rezolve reference documentation was supplied in the workspace.
+Status: superseded by MASTER_PROMPT.md. Missing inputs now use explicitly labelled SIMULATED stand-ins. The items below are needed only for official validation, not the offline build.
 
 The build specification requires: "If something is unclear, write it to `docs/OPEN_QUESTIONS.md` and stop instead of guessing."
 
