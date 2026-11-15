@@ -1,0 +1,22 @@
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "0a4a47dd410d46aa9d04ca569dc648aa"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "0a4a47dd410d46aa9d04ca569dc648aa"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "0a4a47dd410d46aa9d04ca569dc648aa"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "0a4a47dd410d46aa9d04ca569dc648aa"}
+{"mode": "MOCK", "ok": false, "evidence": [], "source": "SIMULATED", "session": "local"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "0dfc34548f5f41a9afe4d310609bcdd5"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "1c83903ba9514e0f8fb28a0dbfce8a47"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g02", "value": 10900}, {"action": "stock_check", "item": "g02", "value": 26}, {"action": "floor_check", "item": "g02", "value": 9592}], "source": "SIMULATED", "session": "1c83903ba9514e0f8fb28a0dbfce8a47"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "72599e24fa974784b675717d1224960b"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "86ccbff2e12441bd96e7fd437510685b"}
+{"mode": "MOCK", "ok": true, "evidence": [], "source": "SIMULATED", "session": "68b86ff6a6cb4dea8bb860ebf6cdfa61"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "1748330e384147bca9f9dca2f6adab93"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "1748330e384147bca9f9dca2f6adab93"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "1748330e384147bca9f9dca2f6adab93"}
+{"mode": "MOCK", "ok": true, "evidence": [{"action": "price_lookup", "item": "g01", "value": 7200}, {"action": "stock_check", "item": "g01", "value": 25}, {"action": "floor_check", "item": "g01", "value": 6336}], "source": "SIMULATED", "session": "1748330e384147bca9f9dca2f6adab93"}

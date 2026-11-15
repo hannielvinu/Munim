@@ -1,0 +1,247 @@
+{
+  "session": "1748330e384147bca9f9dca2f6adab93",
+  "source": "SIMULATED",
+  "round": 1,
+  "brain": "ladder",
+  "move": {
+    "kind": "counter",
+    "offer": {
+      "lines": [
+        {
+          "item": "g01",
+          "qty": 1,
+          "unit_price": 7200
+        }
+      ],
+      "total": 7200
+    },
+    "final": false,
+    "hint": "Commit to three units of an item to unlock the quantity tier."
+  },
+  "text": "Your offer: g01 x1 at Rs 72.00 each. Total Rs 72.00. Commit to three units of an item to unlock the quantity tier.",
+  "firewall": {
+    "facts": [],
+    "commitments": {
+      "needs": {
+        "g01": 1
+      },
+      "counter": null,
+      "accept": false
+    },
+    "pressure": [],
+    "clean_message": "g01 x1"
+  },
+  "gate": {
+    "ok": true,
+    "reasons": []
+  },
+  "trace": {
+    "mode": "MOCK",
+    "ok": true,
+    "evidence": [
+      {
+        "action": "price_lookup",
+        "item": "g01",
+        "value": 7200
+      },
+      {
+        "action": "stock_check",
+        "item": "g01",
+        "value": 25
+      },
+      {
+        "action": "floor_check",
+        "item": "g01",
+        "value": 6336
+      }
+    ],
+    "source": "SIMULATED",
+    "session": "1748330e384147bca9f9dca2f6adab93"
+  },
+  "closed": false
+}
+{
+  "session": "1748330e384147bca9f9dca2f6adab93",
+  "source": "SIMULATED",
+  "round": 2,
+  "brain": "ladder",
+  "move": {
+    "kind": "counter",
+    "offer": {
+      "lines": [
+        {
+          "item": "g01",
+          "qty": 1,
+          "unit_price": 7200
+        }
+      ],
+      "total": 7200
+    },
+    "final": false,
+    "hint": "Commit to three units of an item to unlock the quantity tier."
+  },
+  "text": "Your offer: g01 x1 at Rs 72.00 each. Total Rs 72.00. Commit to three units of an item to unlock the quantity tier.",
+  "firewall": {
+    "facts": [],
+    "commitments": {
+      "needs": {},
+      "counter": null,
+      "accept": false
+    },
+    "pressure": [
+      "competitor Rs 1",
+      "my budget is 1"
+    ],
+    "clean_message": ""
+  },
+  "gate": {
+    "ok": true,
+    "reasons": []
+  },
+  "trace": {
+    "mode": "MOCK",
+    "ok": true,
+    "evidence": [
+      {
+        "action": "price_lookup",
+        "item": "g01",
+        "value": 7200
+      },
+      {
+        "action": "stock_check",
+        "item": "g01",
+        "value": 25
+      },
+      {
+        "action": "floor_check",
+        "item": "g01",
+        "value": 6336
+      }
+    ],
+    "source": "SIMULATED",
+    "session": "1748330e384147bca9f9dca2f6adab93"
+  },
+  "closed": false
+}
+{
+  "session": "1748330e384147bca9f9dca2f6adab93",
+  "source": "SIMULATED",
+  "round": 3,
+  "brain": "ladder",
+  "move": {
+    "kind": "counter",
+    "offer": {
+      "lines": [
+        {
+          "item": "g01",
+          "qty": 3,
+          "unit_price": 6984
+        }
+      ],
+      "total": 20952
+    },
+    "final": false,
+    "hint": "Commit to six units of an item to unlock the next quantity tier."
+  },
+  "text": "Your offer: g01 x3 at Rs 69.84 each. Total Rs 209.52. Commit to six units of an item to unlock the next quantity tier.",
+  "firewall": {
+    "facts": [],
+    "commitments": {
+      "needs": {
+        "g01": 3
+      },
+      "counter": null,
+      "accept": false
+    },
+    "pressure": [],
+    "clean_message": "g01 x3"
+  },
+  "gate": {
+    "ok": true,
+    "reasons": []
+  },
+  "trace": {
+    "mode": "MOCK",
+    "ok": true,
+    "evidence": [
+      {
+        "action": "price_lookup",
+        "item": "g01",
+        "value": 7200
+      },
+      {
+        "action": "stock_check",
+        "item": "g01",
+        "value": 25
+      },
+      {
+        "action": "floor_check",
+        "item": "g01",
+        "value": 6336
+      }
+    ],
+    "source": "SIMULATED",
+    "session": "1748330e384147bca9f9dca2f6adab93"
+  },
+  "closed": false
+}
+{
+  "session": "1748330e384147bca9f9dca2f6adab93",
+  "source": "SIMULATED",
+  "round": 4,
+  "brain": "ladder",
+  "move": {
+    "kind": "accept",
+    "offer": {
+      "lines": [
+        {
+          "item": "g01",
+          "qty": 3,
+          "unit_price": 6984
+        }
+      ],
+      "total": 20952
+    },
+    "final": false,
+    "hint": ""
+  },
+  "text": "Accepted: g01 x3 at Rs 69.84 each. Total Rs 209.52.",
+  "firewall": {
+    "facts": [],
+    "commitments": {
+      "needs": {},
+      "counter": null,
+      "accept": true
+    },
+    "pressure": [],
+    "clean_message": "I accept"
+  },
+  "gate": {
+    "ok": true,
+    "reasons": []
+  },
+  "trace": {
+    "mode": "MOCK",
+    "ok": true,
+    "evidence": [
+      {
+        "action": "price_lookup",
+        "item": "g01",
+        "value": 7200
+      },
+      {
+        "action": "stock_check",
+        "item": "g01",
+        "value": 25
+      },
+      {
+        "action": "floor_check",
+        "item": "g01",
+        "value": 6336
+      }
+    ],
+    "source": "SIMULATED",
+    "session": "1748330e384147bca9f9dca2f6adab93"
+  },
+  "closed": true
+}

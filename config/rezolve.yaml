@@ -1,0 +1,20 @@
+# Fill these only from official Rezolve documentation.
+timeout_seconds: 10
+retries: 2
+credit_limit: 5000
+auth_header: Authorization
+auth_prefix: "Bearer "
+operations:
+  index:
+    path: TODO
+    request_template: {documents: "$documents"}
+    response_path: TODO
+  lookup:
+    path: TODO
+    request_template: {query: "$query"}
+    response_path: TODO
+  verify:
+    path: TODO
+    request_template: {claims: "$claims", trace: "$trace", text: "$text"}
+    response_path: TODO
+

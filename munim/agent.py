@@ -10,7 +10,8 @@ class Agent:
     def __init__(self,brain_name=None,config=None,session=None,language='en',verifier=None,llm=None):
         self.store=Store(); self.gate=Gate(self.store); self.config=config or settings()
         self.brain_name=brain_name or self.config['brain']; self.session=session or uuid.uuid4().hex
-        self.language=language; self.verifier=verifier; self.llm=llm
+        from munim.rezolve import Rezolve
+        self.language=language; self.verifier=verifier or Rezolve(self.store,self.session); self.llm=llm
         self.round=0; self.needs={}; self.previous=None; self.previous_needs={}; self.closed=False
     def respond(self,message):
         if self.closed: return {'blocked':True,'error':'Session is closed','closed':True}
