@@ -1,0 +1,5 @@
+# Optional live LLM mode
+Default LLM_PROVIDER=none gives deterministic scripted buyers and template voice. Set provider, model, matching key in local .env to use actual provider calls for buyers and voice; output goes in outputs/llm, separate from offline results. Voice rejects any non-template wording. Raw response usage is saved in outputs/token_usage.jsonl. Set explicit INR-per-million input/output tariffs for cost; missing tariffs produce null (NOT MEASURED). No credentials or real LLM usage were available for this build. Provider failures abort evaluation rather than disguise offline output as LLM output.
+
+HTTP formats reference [OpenAI Chat Completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create), [Anthropic Messages](https://platform.claude.com/docs/en/api/typescript/messages/create), and [Gemini generateContent](https://ai.google.dev/api/generate-content). This client uses no prompt caching; unusual provider billing such as caching tiers needs adapter extension before claiming exact cost. Models may not reproduce seeded outputs.
+

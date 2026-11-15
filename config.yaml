@@ -1,10 +1,9 @@
-brain: ladder
-safety_buffer_paise: 25
+brain: baseline
+safety_buffer_paise: 0
 quantity_tiers:
   1: 0
   3: 300
   6: 600
 bundle_discount_bps: 200
-final_offer_round: 6
+final_offer_round: 5
 walk_round: 8
-

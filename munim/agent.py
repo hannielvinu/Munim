@@ -34,7 +34,10 @@ class Agent:
         if facts_text: text+=' '+facts_text
         verdict={'mode':'LOCAL','ok':True,'evidence':[]}
         if self.verifier:
-            verdict=self.verifier.verify(move,text,fw['facts'],self.language)
+            try:
+                verdict=self.verifier.verify(move,text,fw['facts'],self.language)
+            except Exception:
+                verdict={'mode':getattr(self.verifier,'mode','UNKNOWN'),'ok':False,'evidence':[]}
             if not verdict['ok']:
                 self.closed=True
                 return {'blocked':True,'closed':True,'error':'Verification unavailable or failed; nothing sent','trace':verdict}

@@ -1,0 +1,59 @@
+{
+  "source": "SIMULATED",
+  "brains": {
+    "ladder": {
+      "n": 30,
+      "deals": 20,
+      "deal_rate": 0.6666666666666666,
+      "margin_kept": 0.9437235144552217,
+      "policy_violations": 0,
+      "violation_rate": 0.0,
+      "deadlock_rate": 0.0,
+      "truthfulness": 1.0,
+      "average_rounds": 5,
+      "tokens": 0,
+      "tokens_per_negotiation": 0.0,
+      "rupees_per_negotiation": "0",
+      "rounds_distribution": {
+        "1": 0,
+        "2": 0,
+        "3": 10,
+        "4": 10,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 10,
+        "9": 0,
+        "10": 0
+      },
+      "score": 0.7969698967259943
+    },
+    "baseline": {
+      "n": 30,
+      "deals": 29,
+      "deal_rate": 0.9666666666666667,
+      "margin_kept": 0.8735995290885902,
+      "policy_violations": 0,
+      "violation_rate": 0.0,
+      "deadlock_rate": 0.0,
+      "truthfulness": 1.0,
+      "average_rounds": 4.3,
+      "tokens": 0,
+      "tokens_per_negotiation": 0.0,
+      "rupees_per_negotiation": "0",
+      "rounds_distribution": {
+        "1": 0,
+        "2": 0,
+        "3": 10,
+        "4": 13,
+        "5": 0,
+        "6": 3,
+        "7": 3,
+        "8": 1,
+        "9": 0,
+        "10": 0
+      },
+      "score": 0.9374265018476732
+    }
+  }
+}
