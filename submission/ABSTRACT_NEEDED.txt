@@ -1,0 +1,1 @@
+Place the human-approved abstract (maximum 500 words) at submission/abstract.docx. No abstract was invented. Use ABSTRACT_FILL.md only with explicit SIMULATED and MOCK labels. Official results and real Rezolve usage are not yet measured.

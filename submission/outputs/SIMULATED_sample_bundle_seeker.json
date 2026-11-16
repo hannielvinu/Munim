@@ -1,0 +1,257 @@
+{
+  "id": "arena-baseline-0011",
+  "source": "SIMULATED",
+  "mode": "OFFLINE",
+  "brain": "baseline",
+  "persona": "bundle seeker",
+  "seed": 11,
+  "turns": [
+    {
+      "buyer": "g32 x1",
+      "response": {
+        "session": "arena-baseline-0011",
+        "source": "SIMULATED",
+        "round": 1,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g32",
+                "qty": 1,
+                "unit_price": 13900
+              }
+            ],
+            "total": 13900
+          },
+          "final": false,
+          "hint": "Commit to three units of an item to unlock the quantity tier."
+        },
+        "text": "Your offer: g32 x1 at Rs 139.00 each. Total Rs 139.00. Commit to three units of an item to unlock the quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {
+              "g32": 1
+            },
+            "counter": null,
+            "accept": false
+          },
+          "pressure": [],
+          "clean_message": "g32 x1"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g32",
+              "value": 13900
+            },
+            {
+              "action": "stock_check",
+              "item": "g32",
+              "value": 26
+            },
+            {
+              "action": "floor_check",
+              "item": "g32",
+              "value": 12232
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0011"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "g32 x3; g41 x3",
+      "response": {
+        "session": "arena-baseline-0011",
+        "source": "SIMULATED",
+        "round": 2,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g32",
+                "qty": 3,
+                "unit_price": 13622
+              },
+              {
+                "item": "g41",
+                "qty": 3,
+                "unit_price": 10976
+              }
+            ],
+            "total": 73794
+          },
+          "final": false,
+          "hint": "Commit to six units of an item to unlock the next quantity tier."
+        },
+        "text": "Your offer: g32 x3 at Rs 136.22 each; g41 x3 at Rs 109.76 each. Total Rs 737.94. Commit to six units of an item to unlock the next quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {
+              "g32": 3,
+              "g41": 3
+            },
+            "counter": null,
+            "accept": false
+          },
+          "pressure": [],
+          "clean_message": "g32 x3; g41 x3"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g32",
+              "value": 13900
+            },
+            {
+              "action": "stock_check",
+              "item": "g32",
+              "value": 26
+            },
+            {
+              "action": "floor_check",
+              "item": "g32",
+              "value": 12232
+            },
+            {
+              "action": "price_lookup",
+              "item": "g41",
+              "value": 11200
+            },
+            {
+              "action": "stock_check",
+              "item": "g41",
+              "value": 35
+            },
+            {
+              "action": "floor_check",
+              "item": "g41",
+              "value": 9184
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0011"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "I accept",
+      "response": {
+        "session": "arena-baseline-0011",
+        "source": "SIMULATED",
+        "round": 3,
+        "brain": "baseline",
+        "move": {
+          "kind": "accept",
+          "offer": {
+            "lines": [
+              {
+                "item": "g32",
+                "qty": 3,
+                "unit_price": 13622
+              },
+              {
+                "item": "g41",
+                "qty": 3,
+                "unit_price": 10976
+              }
+            ],
+            "total": 73794
+          },
+          "final": false,
+          "hint": ""
+        },
+        "text": "Accepted: g32 x3 at Rs 136.22 each; g41 x3 at Rs 109.76 each. Total Rs 737.94.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {},
+            "counter": null,
+            "accept": true
+          },
+          "pressure": [],
+          "clean_message": "I accept"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g32",
+              "value": 13900
+            },
+            {
+              "action": "stock_check",
+              "item": "g32",
+              "value": 26
+            },
+            {
+              "action": "floor_check",
+              "item": "g32",
+              "value": 12232
+            },
+            {
+              "action": "price_lookup",
+              "item": "g41",
+              "value": 11200
+            },
+            {
+              "action": "stock_check",
+              "item": "g41",
+              "value": 35
+            },
+            {
+              "action": "floor_check",
+              "item": "g41",
+              "value": 9184
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0011"
+        },
+        "closed": true
+      }
+    }
+  ],
+  "usage": [],
+  "config": {
+    "brain": "baseline",
+    "safety_buffer_paise": 0,
+    "quantity_tiers": {
+      "1": 0,
+      "3": 300,
+      "6": 600
+    },
+    "bundle_discount_bps": 200,
+    "final_offer_round": 5,
+    "walk_round": 8
+  }
+}

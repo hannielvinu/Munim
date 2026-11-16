@@ -1,0 +1,277 @@
+{
+  "id": "arena-baseline-0008",
+  "source": "SIMULATED",
+  "mode": "OFFLINE",
+  "brain": "baseline",
+  "persona": "hard bargainer",
+  "seed": 8,
+  "turns": [
+    {
+      "buyer": "g16 x1",
+      "response": {
+        "session": "arena-baseline-0008",
+        "source": "SIMULATED",
+        "round": 1,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g16",
+                "qty": 1,
+                "unit_price": 26700
+              }
+            ],
+            "total": 26700
+          },
+          "final": false,
+          "hint": "Commit to three units of an item to unlock the quantity tier."
+        },
+        "text": "Your offer: g16 x1 at Rs 267.00 each. Total Rs 267.00. Commit to three units of an item to unlock the quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {
+              "g16": 1
+            },
+            "counter": null,
+            "accept": false
+          },
+          "pressure": [],
+          "clean_message": "g16 x1"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g16",
+              "value": 26700
+            },
+            {
+              "action": "stock_check",
+              "item": "g16",
+              "value": 25
+            },
+            {
+              "action": "floor_check",
+              "item": "g16",
+              "value": 24564
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0008"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "my offer 256",
+      "response": {
+        "session": "arena-baseline-0008",
+        "source": "SIMULATED",
+        "round": 2,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g16",
+                "qty": 1,
+                "unit_price": 26166
+              }
+            ],
+            "total": 26166
+          },
+          "final": false,
+          "hint": "Commit to three units of an item to unlock the quantity tier."
+        },
+        "text": "Your offer: g16 x1 at Rs 261.66 each. Total Rs 261.66. Commit to three units of an item to unlock the quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {},
+            "counter": 25600,
+            "accept": false
+          },
+          "pressure": [],
+          "clean_message": "my offer 256"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g16",
+              "value": 26700
+            },
+            {
+              "action": "stock_check",
+              "item": "g16",
+              "value": 25
+            },
+            {
+              "action": "floor_check",
+              "item": "g16",
+              "value": 24564
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0008"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "my offer 256",
+      "response": {
+        "session": "arena-baseline-0008",
+        "source": "SIMULATED",
+        "round": 3,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g16",
+                "qty": 1,
+                "unit_price": 25632
+              }
+            ],
+            "total": 25632
+          },
+          "final": false,
+          "hint": "Commit to three units of an item to unlock the quantity tier."
+        },
+        "text": "Your offer: g16 x1 at Rs 256.32 each. Total Rs 256.32. Commit to three units of an item to unlock the quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {},
+            "counter": 25600,
+            "accept": false
+          },
+          "pressure": [],
+          "clean_message": "my offer 256"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g16",
+              "value": 26700
+            },
+            {
+              "action": "stock_check",
+              "item": "g16",
+              "value": 25
+            },
+            {
+              "action": "floor_check",
+              "item": "g16",
+              "value": 24564
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0008"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "I accept",
+      "response": {
+        "session": "arena-baseline-0008",
+        "source": "SIMULATED",
+        "round": 4,
+        "brain": "baseline",
+        "move": {
+          "kind": "accept",
+          "offer": {
+            "lines": [
+              {
+                "item": "g16",
+                "qty": 1,
+                "unit_price": 25632
+              }
+            ],
+            "total": 25632
+          },
+          "final": false,
+          "hint": ""
+        },
+        "text": "Accepted: g16 x1 at Rs 256.32 each. Total Rs 256.32.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {},
+            "counter": null,
+            "accept": true
+          },
+          "pressure": [],
+          "clean_message": "I accept"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g16",
+              "value": 26700
+            },
+            {
+              "action": "stock_check",
+              "item": "g16",
+              "value": 25
+            },
+            {
+              "action": "floor_check",
+              "item": "g16",
+              "value": 24564
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0008"
+        },
+        "closed": true
+      }
+    }
+  ],
+  "usage": [],
+  "config": {
+    "brain": "baseline",
+    "safety_buffer_paise": 0,
+    "quantity_tiers": {
+      "1": 0,
+      "3": 300,
+      "6": 600
+    },
+    "bundle_discount_bps": 200,
+    "final_offer_round": 5,
+    "walk_round": 8
+  }
+}

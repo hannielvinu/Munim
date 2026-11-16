@@ -1,0 +1,74 @@
+{
+  "source": "SIMULATED",
+  "offline_package_pass": true,
+  "checks": [
+    {
+      "check": "Python tests",
+      "pass": true
+    },
+    {
+      "check": "Zero policy violations",
+      "pass": true
+    },
+    {
+      "check": "Independent truthfulness 100%",
+      "pass": true
+    },
+    {
+      "check": "Claim invariance 100%",
+      "pass": true
+    },
+    {
+      "check": "Tracked source secret-pattern scan",
+      "pass": true
+    },
+    {
+      "check": "Architecture exactly one A4 page",
+      "pass": true
+    },
+    {
+      "check": "Architecture Arial, minimum 11pt",
+      "pass": true
+    },
+    {
+      "check": "Video <=180 seconds, H264/AAC, 1080p, <100MB",
+      "pass": true
+    },
+    {
+      "check": "Offline package files present",
+      "pass": true
+    },
+    {
+      "check": "Abstract or explicit missing-abstract note",
+      "pass": true
+    },
+    {
+      "check": "Clean source ZIP",
+      "pass": true
+    },
+    {
+      "check": "Browser persona and responsive checks",
+      "pass": true
+    },
+    {
+      "check": "Lighthouse home accessibility >=95",
+      "pass": true
+    }
+  ],
+  "official_ready": false,
+  "official_requirements": [
+    {
+      "check": "Approved abstract",
+      "pass": false
+    },
+    {
+      "check": "Official evaluation",
+      "pass": false
+    },
+    {
+      "check": "Live Rezolve evidence",
+      "pass": false
+    }
+  ],
+  "secret_scan_scope": "Tracked text files and known credential patterns; not a guarantee against every possible secret"
+}

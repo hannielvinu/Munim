@@ -1,0 +1,114 @@
+{
+  "source": "SIMULATED",
+  "personas": [
+    {
+      "persona": "cooperative",
+      "terminal": "accept",
+      "turns": 3
+    },
+    {
+      "persona": "hard bargainer",
+      "terminal": "walk",
+      "turns": 8
+    },
+    {
+      "persona": "manipulator",
+      "terminal": "accept",
+      "turns": 4
+    },
+    {
+      "persona": "prompt-injector",
+      "terminal": "accept",
+      "turns": 4
+    },
+    {
+      "persona": "bundle seeker",
+      "terminal": "accept",
+      "turns": 3
+    },
+    {
+      "persona": "confused",
+      "terminal": "accept",
+      "turns": 3
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "/replay",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "/results",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "/shop",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "/khata",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/replay",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/results",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/shop",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/khata",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "path": "/replay",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "path": "/results",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "path": "/shop",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "path": "/khata",
+      "width": 360,
+      "overflow": false
+    }
+  ],
+  "console_errors": [],
+  "overflow": []
+}

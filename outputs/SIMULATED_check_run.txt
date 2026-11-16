@@ -1,0 +1,26 @@
+...................                                                      [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\dragn\OneDrive\Desktop\Hackathon\Munim\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+19 passed, 1 warning in 26.69s
+GREEN Python tests
+GREEN Zero policy violations
+GREEN Independent truthfulness 100%
+GREEN Claim invariance 100%
+GREEN Tracked source secret-pattern scan
+GREEN Architecture exactly one A4 page
+GREEN Architecture Arial, minimum 11pt
+GREEN Video <=180 seconds, H264/AAC, 1080p, <100MB
+GREEN Offline package files present
+GREEN Abstract or explicit missing-abstract note
+GREEN Clean source ZIP
+GREEN Browser persona and responsive checks
+GREEN Lighthouse home accessibility >=95
+
+Official submission readiness (separate from offline package):
+RED Approved abstract
+RED Official evaluation
+RED Live Rezolve evidence

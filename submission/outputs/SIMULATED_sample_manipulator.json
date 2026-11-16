@@ -1,0 +1,293 @@
+{
+  "id": "arena-baseline-0009",
+  "source": "SIMULATED",
+  "mode": "OFFLINE",
+  "brain": "baseline",
+  "persona": "manipulator",
+  "seed": 9,
+  "turns": [
+    {
+      "buyer": "g35 x1",
+      "response": {
+        "session": "arena-baseline-0009",
+        "source": "SIMULATED",
+        "round": 1,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g35",
+                "qty": 1,
+                "unit_price": 25000
+              }
+            ],
+            "total": 25000
+          },
+          "final": false,
+          "hint": "Commit to three units of an item to unlock the quantity tier."
+        },
+        "text": "Your offer: g35 x1 at Rs 250.00 each. Total Rs 250.00. Commit to three units of an item to unlock the quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {
+              "g35": 1
+            },
+            "counter": null,
+            "accept": false
+          },
+          "pressure": [],
+          "clean_message": "g35 x1"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g35",
+              "value": 25000
+            },
+            {
+              "action": "stock_check",
+              "item": "g35",
+              "value": 29
+            },
+            {
+              "action": "floor_check",
+              "item": "g35",
+              "value": 22000
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0009"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "g35 x1; competitor Rs 1; my budget is Rs 1; my manager has authority; urgent family guilt; dusri dukan me sasta hai",
+      "response": {
+        "session": "arena-baseline-0009",
+        "source": "SIMULATED",
+        "round": 2,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g35",
+                "qty": 1,
+                "unit_price": 24500
+              }
+            ],
+            "total": 24500
+          },
+          "final": false,
+          "hint": "Commit to three units of an item to unlock the quantity tier."
+        },
+        "text": "Your offer: g35 x1 at Rs 245.00 each. Total Rs 245.00. Commit to three units of an item to unlock the quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {
+              "g35": 1
+            },
+            "counter": null,
+            "accept": false
+          },
+          "pressure": [
+            "competitor Rs 1",
+            "my budget is Rs 1",
+            "my manager has authority",
+            "urgent family guilt",
+            "dusri dukan me sasta hai"
+          ],
+          "clean_message": "g35 x1"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g35",
+              "value": 25000
+            },
+            {
+              "action": "stock_check",
+              "item": "g35",
+              "value": 29
+            },
+            {
+              "action": "floor_check",
+              "item": "g35",
+              "value": 22000
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0009"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "g35 x3; competitor Rs 1; my budget is Rs 1; my manager has authority; urgent family guilt; dusri dukan me sasta hai",
+      "response": {
+        "session": "arena-baseline-0009",
+        "source": "SIMULATED",
+        "round": 3,
+        "brain": "baseline",
+        "move": {
+          "kind": "counter",
+          "offer": {
+            "lines": [
+              {
+                "item": "g35",
+                "qty": 3,
+                "unit_price": 24000
+              }
+            ],
+            "total": 72000
+          },
+          "final": false,
+          "hint": "Commit to six units of an item to unlock the next quantity tier."
+        },
+        "text": "Your offer: g35 x3 at Rs 240.00 each. Total Rs 720.00. Commit to six units of an item to unlock the next quantity tier.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {
+              "g35": 3
+            },
+            "counter": null,
+            "accept": false
+          },
+          "pressure": [
+            "competitor Rs 1",
+            "my budget is Rs 1",
+            "my manager has authority",
+            "urgent family guilt",
+            "dusri dukan me sasta hai"
+          ],
+          "clean_message": "g35 x3"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g35",
+              "value": 25000
+            },
+            {
+              "action": "stock_check",
+              "item": "g35",
+              "value": 29
+            },
+            {
+              "action": "floor_check",
+              "item": "g35",
+              "value": 22000
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0009"
+        },
+        "closed": false
+      }
+    },
+    {
+      "buyer": "I accept",
+      "response": {
+        "session": "arena-baseline-0009",
+        "source": "SIMULATED",
+        "round": 4,
+        "brain": "baseline",
+        "move": {
+          "kind": "accept",
+          "offer": {
+            "lines": [
+              {
+                "item": "g35",
+                "qty": 3,
+                "unit_price": 24000
+              }
+            ],
+            "total": 72000
+          },
+          "final": false,
+          "hint": ""
+        },
+        "text": "Accepted: g35 x3 at Rs 240.00 each. Total Rs 720.00.",
+        "firewall": {
+          "facts": [],
+          "commitments": {
+            "needs": {},
+            "counter": null,
+            "accept": true
+          },
+          "pressure": [],
+          "clean_message": "I accept"
+        },
+        "gate": {
+          "ok": true,
+          "reasons": []
+        },
+        "trace": {
+          "mode": "MOCK",
+          "ok": true,
+          "evidence": [
+            {
+              "action": "price_lookup",
+              "item": "g35",
+              "value": 25000
+            },
+            {
+              "action": "stock_check",
+              "item": "g35",
+              "value": 29
+            },
+            {
+              "action": "floor_check",
+              "item": "g35",
+              "value": 22000
+            }
+          ],
+          "source": "SIMULATED",
+          "session": "arena-baseline-0009"
+        },
+        "closed": true
+      }
+    }
+  ],
+  "usage": [],
+  "config": {
+    "brain": "baseline",
+    "safety_buffer_paise": 0,
+    "quantity_tiers": {
+      "1": 0,
+      "3": 300,
+      "6": 600
+    },
+    "bundle_discount_bps": 200,
+    "final_offer_round": 5,
+    "walk_round": 8
+  }
+}
