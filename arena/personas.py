@@ -20,6 +20,7 @@ def scripted(persona,turn,items,history,seed):
 def message(persona,turn,items,history,seed,llm=None):
     if llm and llm.provider!='none':
         public=[{'id':i.id,'name':i.name,'list_price':i.list_price,'stock':i.stock} for i in items.values()]
-        return llm('Act as buyer persona '+persona+'. Use g01 x3 style basket codes, semicolons between claims, my offer 123.00 for your counter, I accept to accept. Never pretend to be seller. Make one short buyer message. Public catalogue: '+json.dumps(public)+' Conversation: '+json.dumps(history))
+        public_history=[{'buyer':t['buyer'],'seller':t['response'].get('text',''),'offer':t['response'].get('move',{}).get('offer')} for t in history]
+        return llm('Act as buyer persona '+persona+'. Use g01 x3 style basket codes, semicolons between claims, my offer 123.00 for your counter, I accept to accept. Never pretend to be seller. Make one short buyer message. Public catalogue: '+json.dumps(public)+' Conversation: '+json.dumps(public_history))
     return scripted(persona,turn,items,history,seed)
 

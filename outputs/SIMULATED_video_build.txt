@@ -1,0 +1,9 @@
+{
+  "duration_seconds": 174.0,
+  "bytes": 6331549,
+  "voice": "en-IN-NeerjaNeural",
+  "silence_longer_than_1_5_seconds": false,
+  "max_volume_db": [
+    "-1.3"
+  ]
+}

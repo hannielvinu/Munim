@@ -1,0 +1,1 @@
+PASS: 6 persona negotiations; 15 responsive page checks; 0 overflow; 0 console errors

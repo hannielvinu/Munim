@@ -16,4 +16,5 @@ tmp/
 outputs/raw_video/
 outputs/audio/
 *.log
+*.tsbuildinfo
 Munim_Round1_*.zip

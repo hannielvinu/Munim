@@ -22,6 +22,8 @@ class Agent:
             c=Commitment.model_validate(fw['commitments'])
             if c.needs: self.needs=c.needs
             c=c.model_copy(update={'needs':self.needs.copy()})
+            if c.accept and c.counter is not None and (self.previous is None or c.counter!=self.previous.total):
+                c=c.model_copy(update={'accept':False})
             state=State(round=self.round,commitment=c,previous=self.previous,previous_needs=self.previous_needs)
             move=(brain if self.brain_name=='ladder' else baseline_brain).next_move(state,self.store,self.config)
             if move.offer:

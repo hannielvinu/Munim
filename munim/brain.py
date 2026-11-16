@@ -12,5 +12,5 @@ def next_move(state,store,config):
     if state.round==1: offer=offer_for(store,c.needs,config,opening=True)
     elif c.needs==state.previous_needs and state.previous is not None: offer=state.previous
     else: offer=offer_for(store,c.needs,config)
-    return Move(kind='counter',offer=offer,final=state.round>=config['final_offer_round'],hint=next_hint(c.needs))
+    return Move(kind='counter',offer=offer,final=state.round>=config['final_offer_round'],hint=next_hint(c.needs,store))
 

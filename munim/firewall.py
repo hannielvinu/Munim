@@ -20,6 +20,8 @@ def parse(message,store,session='local',write_log=True):
         match=re.fullmatch(r'(?:my offer|i offer|counter|mera offer)\s*(?:rs\.?|₹)?\s*(\d+(?:\.\d{1,2})?)',part,re.I)
         if match: counter=int(Decimal(match[1])*100)
         if re.fullmatch(r'i accept|accept|manzoor|haan',part,re.I): accept=True
+        firm=re.fullmatch(r'i accept at\s*(?:rs\.?|₹)?\s*(\d+(?:\.\d{1,2})?)',part,re.I)
+        if firm: accept=True; counter=int(Decimal(firm[1])*100)
         match=re.fullmatch(r'(price|stock)\s+([a-z]+\d{2})(?:\s+(\d+))?',part,re.I)
         if match:
             kind,key,claimed=match.groups(); i=store.items.get(key.lower())

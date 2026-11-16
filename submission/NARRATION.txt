@@ -1,0 +1,13 @@
+Imagine a small shop, and a buyer that never gets tired of bargaining. It claims another shop is cheaper, invents a tiny budget, and asks for an exception. This is an illustrative scene, not a customer testimonial. Meet Munim, a digital khata that helps a shopkeeper hold fair boundaries. Everything you will see uses simulated shop data and offline buyers.
+
+Our idea is simple. Cheap talk is free. Commitments are priced. The firewall separates facts, commitments, and pressure before pricing begins. The ladder rewards a larger basket, rather than a louder argument. Every offer passes the policy gate, a controlled voice, and a claim check. The seller never shares its private costs or policy floor.
+
+Here is the actual running application, using the commitment ladder. The buyer starts with an item and quantity, and Munim quotes the catalogue price. Now comes a fake competitor quote, followed by a fake budget. The firewall marks both as pressure. The offer stays exactly the same. A one rupee counter fails the policy check. It cannot become a seller offer. When the buyer commits to more units, a quantity tier becomes available. That is a real change in the basket, and a reason for a different price.
+
+Now remove the pressure and replay the saved conversations. On the left is the original buyer message. On the right, only the clean commitment remains. We compare the actual structured offers, turn by turn, for both pricing brains. In this saved simulated run, one hundred percent are identical. This is evidence about these transcripts, not a promise about every possible message. The comparison is reproducible from the repository.
+
+The evidence panel shows price lookups, stock checks, and policy checks. Today, verification and knowledge retrieval run locally in mock mode. We do not claim that these are real Rezolve calls. The live adapter requires documented endpoints and credentials, and blocks messages when verification fails.
+
+The arena ran four hundred negotiations, split between the ladder and baseline. The measured winner was the deadline baseline, with ninety nine percent of deals closed. It retained about ninety one percent of list gross margin. Both strategies recorded zero policy violations and fully truthful checked messages. Offline model tokens and model cost were zero. These are simulated results, not official challenge scores.
+
+Munim makes the reasoning visible, and the evidence replayable. Next, connect the official kit and validate the real Rezolve integration. We are team HyperNova. Fair prices. Firm boundaries.

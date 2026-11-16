@@ -1,0 +1,191 @@
+1
+00:00:00,000 --> 00:00:02,425
+Imagine a small shop, and a buyer that never gets tired of
+
+2
+00:00:02,425 --> 00:00:04,850
+bargaining.
+
+3
+00:00:04,850 --> 00:00:07,891
+It claims another shop is cheaper, invents a tiny budget, and asks
+
+4
+00:00:07,891 --> 00:00:10,933
+for an exception.
+
+5
+00:00:10,933 --> 00:00:15,282
+This is an illustrative scene, not a customer testimonial.
+
+6
+00:00:15,282 --> 00:00:20,363
+Meet Munim, a digital khata that helps a shopkeeper hold fair boundaries.
+
+7
+00:00:20,363 --> 00:00:25,000
+Everything you will see uses simulated shop data and offline buyers.
+
+8
+00:00:25,000 --> 00:00:30,976
+Our idea is simple. Cheap talk is free. Commitments are priced.
+
+9
+00:00:30,976 --> 00:00:36,055
+The firewall separates facts, commitments, and pressure before pricing begins.
+
+10
+00:00:36,055 --> 00:00:40,666
+The ladder rewards a larger basket, rather than a louder argument.
+
+11
+00:00:40,666 --> 00:00:43,252
+Every offer passes the policy gate, a controlled voice, and a claim
+
+12
+00:00:43,252 --> 00:00:45,838
+check.
+
+13
+00:00:45,838 --> 00:00:50,000
+The seller never shares its private costs or policy floor.
+
+14
+00:00:50,000 --> 00:00:54,573
+Here is the actual running application, using the commitment ladder.
+
+15
+00:00:54,573 --> 00:00:57,130
+The buyer starts with an item and quantity, and Munim quotes the
+
+16
+00:00:57,130 --> 00:00:59,687
+catalogue price.
+
+17
+00:00:59,687 --> 00:01:04,185
+Now comes a fake competitor quote, followed by a fake budget.
+
+18
+00:01:04,185 --> 00:01:09,693
+The firewall marks both as pressure. The offer stays exactly the same.
+
+19
+00:01:09,693 --> 00:01:12,662
+A one rupee counter fails the policy check. It cannot become a
+
+20
+00:01:12,662 --> 00:01:15,631
+seller offer.
+
+21
+00:01:15,631 --> 00:01:20,409
+When the buyer commits to more units, a quantity tier becomes available.
+
+22
+00:01:20,409 --> 00:01:22,704
+That is a real change in the basket, and a reason for
+
+23
+00:01:22,704 --> 00:01:25,000
+a different price.
+
+24
+00:01:25,000 --> 00:01:29,045
+Now remove the pressure and replay the saved conversations.
+
+25
+00:01:29,045 --> 00:01:32,241
+On the left is the original buyer message. On the right, only
+
+26
+00:01:32,241 --> 00:01:35,436
+the clean commitment remains.
+
+27
+00:01:35,436 --> 00:01:38,237
+We compare the actual structured offers, turn by turn, for both pricing
+
+28
+00:01:38,237 --> 00:01:41,038
+brains.
+
+29
+00:01:41,038 --> 00:01:45,564
+In this saved simulated run, one hundred percent are identical.
+
+30
+00:01:45,564 --> 00:01:48,374
+This is evidence about these transcripts, not a promise about every possible
+
+31
+00:01:48,374 --> 00:01:51,185
+message.
+
+32
+00:01:51,185 --> 00:01:55,000
+The comparison is reproducible from the repository.
+
+33
+00:01:55,000 --> 00:02:00,059
+The evidence panel shows price lookups, stock checks, and policy checks.
+
+34
+00:02:00,059 --> 00:02:04,593
+Today, verification and knowledge retrieval run locally in mock mode.
+
+35
+00:02:04,593 --> 00:02:08,113
+We do not claim that these are real Rezolve calls.
+
+36
+00:02:08,113 --> 00:02:11,557
+The live adapter requires documented endpoints and credentials, and blocks messages when
+
+37
+00:02:11,557 --> 00:02:15,000
+verification fails.
+
+38
+00:02:15,000 --> 00:02:19,729
+The arena ran four hundred negotiations, split between the ladder and baseline.
+
+39
+00:02:19,729 --> 00:02:22,170
+The measured winner was the deadline baseline, with ninety nine percent of
+
+40
+00:02:22,170 --> 00:02:24,611
+deals closed.
+
+41
+00:02:24,611 --> 00:02:28,257
+It retained about ninety one percent of list gross margin.
+
+42
+00:02:28,257 --> 00:02:33,325
+Both strategies recorded zero policy violations and fully truthful checked messages.
+
+43
+00:02:33,325 --> 00:02:36,662
+Offline model tokens and model cost were zero. These are simulated results,
+
+44
+00:02:36,662 --> 00:02:40,000
+not official challenge scores.
+
+45
+00:02:40,000 --> 00:02:43,862
+Munim makes the reasoning visible, and the evidence replayable.
+
+46
+00:02:43,862 --> 00:02:48,403
+Next, connect the official kit and validate the real Rezolve integration.
+
+47
+00:02:48,403 --> 00:02:50,661
+We are team HyperNova.
+
+48
+00:02:50,661 --> 00:02:54,000
+Fair prices. Firm boundaries.
