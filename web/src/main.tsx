@@ -176,9 +176,22 @@ function App() {
             </NavLink>
             <nav aria-label="Main navigation">
               {navigation.map(({ to, label, icon: Icon }) => (
-                <NavLink end={to === "/"} key={to} to={to}>
+                <NavLink end={to === "/"} key={to} to={to} aria-label={label}>
                   <Icon size={18} strokeWidth={1.8} />
-                  <span>{label}</span>
+                  <span className="nav-label-long">{label}</span>
+                  <span className="nav-label-short">
+                    {
+                      (
+                        {
+                          "/": "Live",
+                          "/replay": "Replay",
+                          "/results": "Results",
+                          "/shop": "Shop",
+                          "/khata": "Khata",
+                        } as Record<string, string>
+                      )[to]
+                    }
+                  </span>
                 </NavLink>
               ))}
             </nav>
@@ -281,7 +294,7 @@ function Live() {
             disabled={!!session && !last?.closed}
             onChange={(e) => setBrain(e.target.value)}
           >
-            <option value="ladder">Ladder pricing</option>
+            <option value="ladder">Ladder</option>
             <option value="baseline">Baseline</option>
           </select>
         </label>
@@ -674,16 +687,19 @@ function Results() {
           <h2>Deals closed, by buyer persona</h2>
           <Badge>PERCENT</Badge>
         </div>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={chart} margin={{ bottom: 36, right: 16 }}>
-            <XAxis
+        <ResponsiveContainer width="100%" height={340}>
+          <BarChart
+            layout="vertical"
+            data={chart}
+            margin={{ left: 8, right: 24, bottom: 8 }}
+          >
+            <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 14 }} />
+            <YAxis
+              type="category"
               dataKey="name"
-              interval={0}
-              angle={-18}
-              textAnchor="end"
-              tick={{ fontSize: 12 }}
+              width={122}
+              tick={{ fontSize: 14 }}
             />
-            <YAxis domain={[0, 100]} />
             <Tooltip />
             <Legend verticalAlign="top" />
             <Bar dataKey="ladder" fill="#d95113" radius={[2, 2, 0, 0]} />
@@ -919,16 +935,36 @@ function MoreCharts({ data }: { data: Data }) {
           <div className="card-head">
             <h2>{String(title)}</h2>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={rows as Data[]} margin={{ bottom: 40, right: 16 }}>
-              <XAxis
-                dataKey="name"
-                interval={0}
-                angle={-20}
-                textAnchor="end"
-                tick={{ fontSize: 11 }}
-              />
-              <YAxis />
+          <ResponsiveContainer width="100%" height={340}>
+            <BarChart
+              data={rows as Data[]}
+              layout={
+                title === "Margin retained by persona"
+                  ? "vertical"
+                  : "horizontal"
+              }
+              margin={{ left: 8, right: 20, bottom: 12 }}
+            >
+              {title === "Margin retained by persona" ? (
+                <>
+                  <XAxis
+                    type="number"
+                    domain={[0, 100]}
+                    tick={{ fontSize: 14 }}
+                  />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    width={122}
+                    tick={{ fontSize: 14 }}
+                  />
+                </>
+              ) : (
+                <>
+                  <XAxis dataKey="name" interval={0} tick={{ fontSize: 14 }} />
+                  <YAxis tick={{ fontSize: 14 }} />
+                </>
+              )}
               <Tooltip />
               <Legend verticalAlign="top" />
               <Bar dataKey="ladder" fill="#d95113" />

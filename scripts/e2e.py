@@ -41,6 +41,10 @@ def main():
             page.set_viewport_size({'width':width,'height':height})
             for path in ['/','/replay','/results','/shop','/khata']:
                 page.goto('http://127.0.0.1:8000'+path); page.wait_for_load_state('networkidle')
+                if path=='/replay':
+                    sizes=page.evaluate("({transcript:parseFloat(getComputedStyle(document.querySelector('.replay-row p')).fontSize),offer:parseFloat(getComputedStyle(document.querySelector('.replay-row code')).fontSize),label:parseFloat(getComputedStyle(document.querySelector('.select-row')).fontSize)})")
+                    assert sizes['transcript']>=16 and sizes['offer']>=14 and sizes['label']>=14,sizes
+                    report.setdefault('replay_typography',[]).append({'width':width,**sizes})
                 page.screenshot(path=str(dest/f"SIMULATED_{path.strip('/') or 'live'}_{width}.png"),full_page=True)
                 overflow=page.evaluate('document.documentElement.scrollWidth > innerWidth')
                 assert not overflow,(path,width)

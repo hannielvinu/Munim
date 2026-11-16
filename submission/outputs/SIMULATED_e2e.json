@@ -111,5 +111,25 @@
   ],
   "console_errors": [],
   "overflow": [],
-  "catalogue_filter_search_and_private_view": "PASS"
+  "catalogue_filter_search_and_private_view": "PASS",
+  "replay_typography": [
+    {
+      "width": 1440,
+      "transcript": 16,
+      "offer": 14,
+      "label": 14
+    },
+    {
+      "width": 390,
+      "transcript": 16,
+      "offer": 14,
+      "label": 14
+    },
+    {
+      "width": 360,
+      "transcript": 16,
+      "offer": 14,
+      "label": 14
+    }
+  ]
 }

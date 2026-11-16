@@ -34,6 +34,6 @@ dist/assets/dm-sans-latin-700-normal-CUSSCpQX.woff                      18.50 kB
 dist/assets/dm-sans-latin-500-normal-Dr3UlScf.woff                      18.52 kB
 dist/assets/noto-sans-devanagari-devanagari-400-normal-BlDd6KY1.woff2   50.42 kB
 dist/assets/noto-sans-devanagari-devanagari-400-normal-CdOJmQ4E.woff    68.47 kB
-dist/assets/index-B4_1Meot.css                                          28.61 kB │ gzip:   6.85 kB
-dist/assets/index-DvajfYhL.js                                          798.72 kB │ gzip: 245.15 kB
-✓ built in 20.11s
+dist/assets/index-DhzBxy82.css                                          33.15 kB │ gzip:   7.44 kB
+dist/assets/index-dzF7u9uB.js                                          799.23 kB │ gzip: 245.25 kB
+✓ built in 27.26s

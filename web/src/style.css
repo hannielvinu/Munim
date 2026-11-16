@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 :root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
   --paper: #f7f8fa;
   --surface: #ffffff;
   --ink: #202431;
@@ -59,7 +64,7 @@ button {
   border: 1px solid var(--accent);
   border-radius: 8px;
   padding: 12px 18px;
-  font-size: 14px;
+  font-size: var(--text-base);
   font-weight: 700;
   cursor: pointer;
   transition:
@@ -85,7 +90,7 @@ select {
   border-radius: 7px;
   background: white;
   color: var(--ink);
-  font-size: 14px;
+  font-size: var(--text-base);
   min-height: 44px;
 }
 input:disabled,
@@ -94,7 +99,7 @@ select:disabled {
   background: #f5f6f8;
 }
 label {
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: #565d6b;
 }
@@ -106,20 +111,20 @@ h1 {
   margin: 9px 0 12px;
 }
 h2 {
-  font-size: 18px;
+  font-size: var(--text-lg);
   font-weight: 700;
   letter-spacing: -0.35px;
   line-height: 1.4;
 }
 h3 {
-  font-size: 14px;
+  font-size: var(--text-base);
   font-weight: 700;
 }
 p {
   line-height: 1.65;
 }
 small {
-  font-size: 12px;
+  font-size: var(--text-sm);
   line-height: 1.6;
 }
 code,
@@ -165,7 +170,7 @@ pre {
   color: var(--accent);
 }
 .brand small {
-  font-size: 8px;
+  font-size: var(--text-xs);
   color: #69707b;
   letter-spacing: 1px;
   border-left: 1px solid #dce0e6;
@@ -185,7 +190,7 @@ nav a {
   gap: 7px;
   position: relative;
   white-space: nowrap;
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: #5b6270;
 }
@@ -209,12 +214,12 @@ nav a:hover {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 700;
 }
 .account small {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-xs);
   font-weight: 400;
   color: var(--muted);
   margin-top: 3px;
@@ -228,7 +233,7 @@ nav a:hover {
   border-radius: 50%;
   height: 36px;
   width: 36px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.5px;
 }
 main {
@@ -247,7 +252,7 @@ main {
 .breadcrumb {
   display: flex;
   gap: 11px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 .breadcrumb span {
@@ -260,7 +265,7 @@ main {
 .environment {
   display: flex;
   align-items: center;
-  font-size: 9px;
+  font-size: var(--text-xs);
   letter-spacing: 0.3px;
   font-weight: 600;
   color: #656e79;
@@ -279,13 +284,13 @@ main {
   padding: 28px 0;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: var(--text-xs);
   letter-spacing: 1px;
   font-weight: 700;
   color: var(--accent);
 }
 .heading p {
-  font-size: 14px;
+  font-size: var(--text-base);
   color: var(--muted);
   max-width: 750px;
 }
@@ -304,7 +309,7 @@ main {
   background: #f3f4f7;
   border: 1px solid #e2e5eb;
   color: #555e6e;
-  font-size: 9px;
+  font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0.3px;
   white-space: nowrap;
@@ -362,17 +367,17 @@ main {
   border-radius: 7px;
   background: var(--tint);
   color: var(--accent);
-  font-size: 20px;
+  font-size: var(--text-xl);
   font-weight: 800;
 }
 .card-head .muted {
   display: block;
   margin-top: 6px;
-  font-size: 11px;
+  font-size: var(--text-xs);
 }
 .muted {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 .conversation {
   overflow: hidden;
@@ -404,7 +409,7 @@ main {
   font-weight: 700;
 }
 .welcome p {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--muted);
   margin: 12px 0;
 }
@@ -417,7 +422,7 @@ main {
   align-items: center;
   gap: 6px;
   color: var(--accent);
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 700;
   margin: 2px 0 19px;
 }
@@ -430,13 +435,13 @@ main {
   justify-content: center;
   gap: 10px;
   color: #626b78;
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 .example-message code {
   padding: 7px 10px;
   border: 1px solid #e2e6ec;
   border-radius: 5px;
-  font-size: 10px;
+  font-size: var(--text-xs);
   background: #fafbfc;
   color: #4e5869;
 }
@@ -451,13 +456,13 @@ main {
   overflow-wrap: anywhere;
 }
 .bubble small {
-  font-size: 9px;
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.6px;
   color: #626b79;
 }
 .bubble p {
-  font-size: 14px;
+  font-size: var(--text-base);
   margin-top: 8px;
   line-height: 1.7;
 }
@@ -485,7 +490,7 @@ main {
   margin-top: 13px;
 }
 .seller strong span {
-  font-size: 10px;
+  font-size: var(--text-xs);
   font-weight: 400;
   color: #676d77;
   letter-spacing: 0;
@@ -499,7 +504,7 @@ main {
   color: var(--accent);
   background: white;
   border: 1px solid #e5d4c9;
-  font-size: 12px;
+  font-size: var(--text-sm);
   padding: 9px 13px;
 }
 .secondary:hover:not(:disabled) {
@@ -513,14 +518,14 @@ main {
 .composer input {
   margin: 0;
   min-width: 0;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 .composer form button {
-  font-size: 12px;
+  font-size: var(--text-sm);
   padding-inline: 20px;
 }
 .composer small {
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 .mind .card-head {
@@ -544,7 +549,7 @@ main {
   color: #636d7b;
   background: #f0f2f6;
   border-radius: 6px;
-  font-size: 9px;
+  font-size: var(--text-xs);
   font-weight: 700;
 }
 .mind-step > div {
@@ -556,10 +561,10 @@ main {
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 .mind-step p {
-  font-size: 11px;
+  font-size: var(--text-xs);
   line-height: 1.65;
   margin-top: 5px;
 }
@@ -571,7 +576,7 @@ main {
   gap: 6px;
   padding-top: 11px;
   overflow-wrap: anywhere;
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 .fact-group b,
 .commit-group b,
@@ -595,7 +600,7 @@ main {
 }
 .pressure-group small {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-xs);
 }
 .rungs {
   display: flex;
@@ -609,7 +614,7 @@ main {
   border: 1px solid #e1e5ec;
   background: #f7f8fa;
   border-radius: 5px;
-  font-size: 9px;
+  font-size: var(--text-xs);
   color: #5f6876;
 }
 .rungs span.active {
@@ -620,11 +625,11 @@ main {
 }
 .green {
   color: var(--leaf);
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 details {
   margin-top: 9px;
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: #566274;
 }
 summary {
@@ -635,7 +640,7 @@ pre {
   overflow-wrap: anywhere;
   max-height: 180px;
   overflow: auto;
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 .margin {
   padding: 18px 20px;
@@ -646,7 +651,7 @@ pre {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: #596474;
 }
 .margin strong {
@@ -660,7 +665,7 @@ pre {
   margin: 9px 0 6px;
 }
 .margin small {
-  font-size: 9px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 .bottom-note {
@@ -671,11 +676,11 @@ pre {
   border-top: 1px solid var(--rule);
   padding-top: 22px;
   margin-top: 32px;
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 .bottom-note strong {
-  font-size: 17px;
+  font-size: var(--text-lg);
   letter-spacing: -0.6px;
   color: #404855;
   margin-right: 10px;
@@ -687,7 +692,7 @@ pre {
   padding: 50px;
   text-align: center;
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--text-base);
 }
 .proof {
   display: flex;
@@ -707,7 +712,7 @@ pre {
   margin: 7px 0 9px;
 }
 .proof p {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: #45634f;
 }
 .proof .eyebrow {
@@ -732,7 +737,7 @@ pre {
   margin: 30px 0 16px;
 }
 .replay-head h2 {
-  font-size: 15px;
+  font-size: var(--text-base);
 }
 .replay-row {
   margin-bottom: 16px;
@@ -742,10 +747,10 @@ pre {
 }
 .replay-row .eyebrow {
   color: #697383;
-  font-size: 9px;
+  font-size: var(--text-xs);
 }
 .replay-row p {
-  font-size: 13px;
+  font-size: var(--text-sm);
   min-height: 42px;
   margin: 12px 0;
   overflow-wrap: anywhere;
@@ -762,7 +767,7 @@ pre {
   letter-spacing: -0.8px;
 }
 code {
-  font-size: 11px;
+  font-size: var(--text-xs);
   overflow-wrap: anywhere;
 }
 .notice {
@@ -771,7 +776,7 @@ code {
   color: #83532a;
   border-radius: 8px;
   padding: 14px 18px;
-  font-size: 12px;
+  font-size: var(--text-sm);
   line-height: 1.7;
   margin-bottom: 24px;
 }
@@ -785,7 +790,7 @@ code {
   padding: 24px;
 }
 .stat > span {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--muted);
   font-weight: 500;
 }
@@ -798,7 +803,7 @@ code {
   color: var(--ink);
 }
 .stat > small {
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: var(--muted);
 }
 .chart {
@@ -810,14 +815,14 @@ code {
   fill: #626c7b;
 }
 .recharts-legend-wrapper {
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 .padded {
   padding: 24px;
   margin-bottom: 24px;
 }
 .padded p {
-  font-size: 14px;
+  font-size: var(--text-base);
   margin-top: 12px;
 }
 .padded h2 .badge {
@@ -830,11 +835,11 @@ dl > div {
   gap: 16px;
   border-bottom: 1px solid var(--rule);
   padding: 14px 0;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 dd {
   margin: 0;
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 600;
 }
 .shop-tools {
@@ -852,7 +857,7 @@ dd {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 500;
 }
 .toggle input {
@@ -872,7 +877,7 @@ dd {
   background: white;
   color: #5f6875;
   border-color: #dfe3ea;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 500;
   border-radius: 7px;
   padding: 9px 16px;
@@ -892,14 +897,14 @@ dd {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--muted);
   margin-bottom: 16px;
 }
 .catalogue-meta > span:first-child {
   color: #303b4b;
   font-weight: 700;
-  font-size: 14px;
+  font-size: var(--text-base);
 }
 .catalogue {
   display: grid;
@@ -957,18 +962,18 @@ dd {
   gap: 8px;
 }
 .product-meta .badge {
-  font-size: 8px;
+  font-size: var(--text-xs);
   border: 0;
   background: none;
   padding: 0;
   color: #626c7a;
 }
 .product-meta .muted {
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: #68717e;
 }
 .product h2 {
-  font-size: 16px;
+  font-size: var(--text-base);
   font-weight: 700;
   line-height: 1.4;
   margin: 12px 0 15px;
@@ -980,14 +985,14 @@ dd {
   letter-spacing: -0.5px;
 }
 .product p {
-  font-size: 11px;
+  font-size: var(--text-xs);
   margin-top: 7px;
 }
 .private {
   border-top: 1px dashed var(--rule);
   padding-top: 11px;
   margin-top: 12px;
-  font-size: 10px;
+  font-size: var(--text-xs);
   line-height: 1.7;
   color: #586677;
 }
@@ -1001,7 +1006,7 @@ dd {
   gap: 12px;
   padding: 18px 24px;
   border-bottom: 1px solid var(--rule);
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 .ledger-row:hover {
   background: #fafbfc;
@@ -1010,7 +1015,7 @@ dd {
   overflow-wrap: anywhere;
 }
 .ledger-row span:first-child {
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: #566174;
 }
 .ledger-row strong {
@@ -1018,7 +1023,7 @@ dd {
   font-weight: 700;
 }
 .ledger-row.header {
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 700;
   color: #5b6575;
   background: #f4f6f9;
@@ -1046,7 +1051,7 @@ dd {
     gap: 18px;
   }
   nav a {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .account > span:last-child {
     display: none;
@@ -1073,7 +1078,7 @@ dd {
     gap: 15px;
   }
   nav a {
-    font-size: 11px;
+    font-size: var(--text-xs);
     gap: 5px;
   }
   nav a svg {
@@ -1091,7 +1096,7 @@ dd {
     padding: 20px;
   }
   .toolbar button {
-    font-size: 12px;
+    font-size: var(--text-sm);
     padding-inline: 12px;
   }
   .two-col {
@@ -1143,16 +1148,16 @@ dd {
   }
   nav a {
     padding: 0 2px 17px;
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
   .live-grid {
     grid-template-columns: 1fr;
   }
   .mind-step p {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .mind-step h3 {
-    font-size: 14px;
+    font-size: var(--text-base);
   }
   .toolbar {
     flex-wrap: wrap;
@@ -1184,7 +1189,7 @@ dd {
     font-size: 26px;
   }
   .brand small {
-    font-size: 7px;
+    font-size: var(--text-xs);
   }
   .account > span:last-child {
     display: none;
@@ -1192,7 +1197,7 @@ dd {
   .team-avatar {
     width: 32px;
     height: 32px;
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   nav {
     gap: 3px;
@@ -1203,7 +1208,7 @@ dd {
     min-width: 0;
     flex-direction: column;
     text-align: center;
-    font-size: 9px;
+    font-size: var(--text-xs);
     white-space: normal;
     gap: 7px;
     padding: 0 3px 14px;
@@ -1224,11 +1229,11 @@ dd {
     gap: 8px;
   }
   .breadcrumb {
-    font-size: 9px;
+    font-size: var(--text-xs);
     gap: 6px;
   }
   .environment {
-    font-size: 8px;
+    font-size: var(--text-xs);
   }
   .environment-detail {
     display: none;
@@ -1242,10 +1247,10 @@ dd {
     max-width: 320px;
   }
   .heading p {
-    font-size: 13px;
+    font-size: var(--text-sm);
   }
   .eyebrow {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   .toolbar {
     padding: 18px 16px;
@@ -1253,30 +1258,30 @@ dd {
   }
   .toolbar label {
     flex: 1 1 43%;
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
   .toolbar button {
     flex: 1 1 43%;
-    font-size: 11px;
+    font-size: var(--text-xs);
     padding-inline: 7px;
     min-height: 44px;
   }
   select,
   input {
-    font-size: 12px;
+    font-size: var(--text-sm);
     padding: 11px 10px;
   }
   .card-head {
     padding: 17px 16px;
   }
   .card-head h2 {
-    font-size: 16px;
+    font-size: var(--text-base);
   }
   .card-head .muted {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   .badge {
-    font-size: 8px;
+    font-size: var(--text-xs);
     padding: 4px 6px;
   }
   .messages {
@@ -1296,35 +1301,35 @@ dd {
     font-size: 22px;
   }
   .welcome p {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .example-message {
     gap: 6px;
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   .example-message code {
-    font-size: 9px;
+    font-size: var(--text-xs);
     padding: 7px;
   }
   .composer {
     padding: 16px;
   }
   .composer input {
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
   .composer form button {
     padding-inline: 14px;
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .composer small {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   .bubble {
     max-width: 95%;
     padding: 14px;
   }
   .bubble p {
-    font-size: 13px;
+    font-size: var(--text-sm);
   }
   .seller strong {
     font-size: 24px;
@@ -1333,22 +1338,22 @@ dd {
     padding: 18px 16px;
   }
   .mind-step p {
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
   .fact-group,
   .commit-group,
   .pressure-group {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   .rungs span {
-    font-size: 9px;
+    font-size: var(--text-xs);
     padding: 8px 3px;
   }
   .bottom-note {
     align-items: start;
     flex-direction: column;
     gap: 10px;
-    font-size: 9px;
+    font-size: var(--text-xs);
     margin-top: 28px;
   }
   .proof {
@@ -1362,7 +1367,7 @@ dd {
     font-size: 27px;
   }
   .proof p {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .replay-head {
     display: none;
@@ -1379,10 +1384,10 @@ dd {
     border-left: 3px solid #479866;
   }
   .replay-row p {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .notice {
-    font-size: 11px;
+    font-size: var(--text-xs);
     padding: 13px;
   }
   .stats {
@@ -1392,48 +1397,48 @@ dd {
     padding: 19px 16px;
   }
   .stat > span {
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
   .stat > strong {
     font-size: 31px;
   }
   .stat > small {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   .padded {
     padding: 20px;
   }
   .padded p {
-    font-size: 13px;
+    font-size: var(--text-sm);
   }
   .padded h2 {
-    font-size: 16px;
+    font-size: var(--text-base);
   }
   dl > div {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   dd {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .shop-tools {
     display: block;
   }
   .toggle {
     margin-top: 18px;
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
   .category-filters {
     gap: 7px;
   }
   .category-filters button {
-    font-size: 11px;
+    font-size: var(--text-xs);
     padding: 8px 11px;
   }
   .catalogue-meta {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   .catalogue-meta > span:first-child {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   .catalogue {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1450,7 +1455,7 @@ dd {
     width: 39px;
   }
   .product h2 {
-    font-size: 14px;
+    font-size: var(--text-base);
     min-height: 40px;
     margin: 10px 0 13px;
   }
@@ -1458,24 +1463,24 @@ dd {
     font-size: 19px;
   }
   .product p {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   .product-meta .badge,
   .product-meta .muted {
-    font-size: 8px;
+    font-size: var(--text-xs);
   }
   .private {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   .ledger-row {
     padding: 15px 10px;
     gap: 7px;
-    font-size: 10px;
+    font-size: var(--text-xs);
     grid-template-columns: 1.25fr 1fr 0.8fr 1fr;
   }
   .ledger-row span:first-child,
   .ledger-row.header {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1497,5 +1502,289 @@ dd {
   }
   .header-inner nav {
     order: 3;
+  }
+}
+
+/* Reading scale: never shrink content to make it fit a narrow screen. */
+h1 {
+  font-size: 32px;
+  line-height: 1.25;
+}
+h2,
+.card-head h2 {
+  font-size: var(--text-xl);
+  line-height: 1.4;
+}
+h3,
+.mind-step h3 {
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+.heading p,
+.welcome p,
+.bubble p,
+.proof p,
+.replay-row p,
+.padded p,
+.ledger-row,
+dl > div,
+dd {
+  font-size: var(--text-base);
+  line-height: 1.65;
+}
+label,
+.toolbar label,
+.toggle,
+.muted,
+.mind-step p,
+.fact-group,
+.commit-group,
+.pressure-group,
+.composer small,
+.product p,
+.catalogue-meta,
+.notice,
+.margin > div,
+.rungs span,
+summary,
+.select-row,
+.stat > span {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+input,
+select,
+button,
+.composer input,
+.composer form button,
+.secondary,
+.catalogue-link {
+  font-size: var(--text-base);
+}
+code,
+pre,
+.example-message code,
+.replay-row code {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+.badge,
+.eyebrow,
+.step-num,
+.environment,
+.breadcrumb,
+.card-head .muted,
+.bubble small,
+.margin small,
+.bottom-note,
+.stat > small,
+.product-meta .badge,
+.product-meta .muted,
+.private,
+.ledger-row span:first-child,
+.ledger-row.header,
+.pressure-group small {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+.brand small {
+  max-width: 80px;
+  font-size: 10px;
+}
+nav a {
+  font-size: var(--text-sm);
+}
+.nav-label-short {
+  display: none;
+}
+.fact-group,
+.commit-group,
+.pressure-group {
+  grid-template-columns: 105px minmax(0, 1fr);
+}
+.card-head {
+  flex-wrap: wrap;
+}
+.messages {
+  height: 420px;
+}
+.welcome {
+  padding-block: 24px;
+}
+.welcome p {
+  margin-block: 14px;
+}
+.bubble {
+  max-width: 96%;
+}
+.product h2 {
+  font-size: var(--text-base);
+  min-height: 48px;
+}
+.product p {
+  min-height: 21px;
+}
+.product-meta {
+  flex-wrap: wrap;
+}
+.stats .stat > strong {
+  line-height: 1.2;
+}
+.replay-row .eyebrow {
+  font-size: var(--text-xs);
+}
+.replay-head h2 {
+  font-size: var(--text-lg);
+}
+@media (max-width: 1100px) {
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 20px 28px 0;
+  }
+  .header-inner .brand {
+    order: 1;
+  }
+  .header-inner .account {
+    order: 2;
+    display: flex;
+    margin-left: auto;
+  }
+  .header-inner nav {
+    order: 3;
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+  nav a {
+    padding-bottom: 16px;
+    font-size: var(--text-sm);
+  }
+  .live-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .header-inner {
+    padding: 18px 18px 0;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+  nav a {
+    font-size: var(--text-xs);
+    min-width: 0;
+  }
+  .nav-label-long {
+    display: none;
+  }
+  .nav-label-short {
+    display: block;
+  }
+  .brand small {
+    font-size: 10px;
+  }
+  .topbar {
+    flex-wrap: wrap;
+  }
+  .environment-detail {
+    display: none;
+  }
+  .toolbar label:first-child {
+    flex: 1 1 100%;
+  }
+  .toolbar label {
+    flex: 1 1 43%;
+  }
+  .toolbar button {
+    flex: 1 1 100%;
+    font-size: var(--text-base);
+  }
+  .messages {
+    height: 410px;
+    padding: 20px 16px;
+  }
+  .welcome p {
+    font-size: var(--text-base);
+  }
+  .welcome h3 {
+    font-size: 22px;
+  }
+  .example-message {
+    flex-wrap: wrap;
+    font-size: var(--text-xs);
+    gap: 8px;
+  }
+  .example-message code {
+    font-size: var(--text-xs);
+  }
+  .card-head h2 {
+    font-size: var(--text-lg);
+  }
+  .composer form {
+    flex-wrap: wrap;
+  }
+  .composer input {
+    flex: 1 1 100%;
+  }
+  .composer form button {
+    margin-left: auto;
+  }
+  .mind-step {
+    gap: 9px;
+  }
+  .fact-group,
+  .commit-group,
+  .pressure-group {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .pressure-group p {
+    grid-column: 1;
+  }
+  .rungs {
+    flex-wrap: wrap;
+  }
+  .rungs span {
+    min-width: 40%;
+  }
+  .proof h2 {
+    font-size: 26px;
+  }
+  .proof > .badge {
+    white-space: normal;
+  }
+  .offer-row strong {
+    font-size: 26px;
+  }
+  .ledger-row {
+    grid-template-columns: 1.4fr 1fr;
+    row-gap: 10px;
+    font-size: var(--text-sm);
+  }
+  .ledger-row strong {
+    text-align: left;
+  }
+  .ledger-row.header {
+    display: none;
+  }
+  .product h2 {
+    font-size: var(--text-base);
+    min-height: 48px;
+  }
+  .product p {
+    font-size: var(--text-xs);
+  }
+  .product > strong {
+    font-size: 20px;
+  }
+  .category-filters button {
+    font-size: var(--text-sm);
+  }
+  .catalogue-meta {
+    flex-wrap: wrap;
+  }
+  .stat {
+    padding: 18px 14px;
   }
 }
