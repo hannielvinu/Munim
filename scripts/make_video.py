@@ -174,7 +174,7 @@ def main():
     # valid start offset. Locate the title-to-real-UI transition at planned 50s.
     import subprocess
     pixels=subprocess.check_output([FFMPEG,'-v','error','-ss','45','-i',str(raw),'-t','20','-vf','fps=10,crop=20:20:0:0','-f','rawvideo','-pix_fmt','rgb24','-'])
-    transitions=[i for i in range(len(pixels)//1200) if pixels[i*1200]<247 and pixels[i*1200+1]<241]
+    transitions=[i for i in range(len(pixels)//1200) if (pixels[i*1200]<247 and pixels[i*1200+1]<241) or (pixels[i*1200]>252 and pixels[i*1200+1]>250)]
     if not transitions: raise RuntimeError('Cannot align title-to-UI transition')
     offset=max(0,45+transitions[0]/10-50)
     (ROOT/'outputs/SIMULATED_video_timing.json').write_text(json.dumps({'visual_start_offset_seconds':offset,'method':'title-to-UI colour transition, 100ms samples'}))

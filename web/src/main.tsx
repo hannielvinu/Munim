@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   BrowserRouter,
@@ -17,14 +17,18 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import "@fontsource/instrument-serif/400.css";
-import "@fontsource/instrument-serif/400-italic.css";
-import "@fontsource/manrope/400.css";
-import "@fontsource/manrope/500.css";
-import "@fontsource/manrope/600.css";
-import "@fontsource/manrope/700.css";
-import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/dm-sans/400.css";
+import "@fontsource/dm-sans/500.css";
+import "@fontsource/dm-sans/600.css";
+import "@fontsource/dm-sans/700.css";
+import "@fontsource/dm-sans/800.css";
 import {
+  Wheat,
+  Coffee,
+  Droplets,
+  Cookie,
+  Package,
+  ShoppingBasket,
   MessagesSquare,
   GitCompareArrows,
   ChartNoAxesCombined,
@@ -159,47 +163,33 @@ function App() {
     <BrowserRouter>
       <ScrollTop />
       <div className="app">
-        <aside className="sidebar">
-          <NavLink className="brand" to="/">
-            <span className="brand-icon">म</span>
-            <span>
-              munim<span className="brand-period">.</span>
-              <small>A SHOPKEEPER'S COMPANION</small>
-            </span>
-          </NavLink>
-          <div className="nav-label">WORKSPACE</div>
-          <nav aria-label="Main navigation">
-            {navigation.map(({ to, label, icon: Icon }) => (
-              <NavLink end={to === "/"} key={to} to={to}>
-                <Icon size={18} strokeWidth={1.5} />
-                <span>{label}</span>
-                <ArrowUpRight className="nav-arrow" size={14} />
-              </NavLink>
-            ))}
-          </nav>
-          <div className="sidebar-note">
-            <div className="notebook-lines" aria-hidden="true">
-              <span />
-              <span />
-              <span />
+        <header className="app-header">
+          <div className="header-inner">
+            <NavLink className="brand" to="/">
+              <span className="brand-icon" aria-hidden="true">
+                m
+              </span>
+              <span>
+                munim<span className="brand-period">.</span>
+              </span>
+              <small>SELLER HUB</small>
+            </NavLink>
+            <nav aria-label="Main navigation">
+              {navigation.map(({ to, label, icon: Icon }) => (
+                <NavLink end={to === "/"} key={to} to={to}>
+                  <Icon size={18} strokeWidth={1.8} />
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </nav>
+            <div className="account">
+              <span className="team-avatar">HN</span>
+              <span>
+                HyperNova<small>Shopkeeper workspace</small>
+              </span>
             </div>
-            <p>
-              Good business.
-              <br />
-              <em>Clear accounts.</em>
-            </p>
-            <small>
-              A little less guesswork.
-              <br />A little more trust.
-            </small>
           </div>
-          <footer>
-            <span className="team-avatar">HN</span>
-            <div>
-              HyperNova<small>TM-394CDC172A3</small>
-            </div>
-          </footer>
-        </aside>
+        </header>
         <main>
           <WorkspaceBar data={data} />
           <Routes>
@@ -209,10 +199,12 @@ function App() {
             <Route path="/shop" element={<Shop />} />
             <Route path="/khata" element={<Khata />} />
           </Routes>
-          <div className="bottom-note">
-            <span>Built for the everyday shopkeeper.</span>
-            <span>Simulated shop · no payments or inventory reservations</span>
-          </div>
+          <footer className="bottom-note">
+            <span>
+              <strong>munim.</strong> Clear terms. Better business.
+            </span>
+            <span>SIMULATED shop · No payments or stock reservations</span>
+          </footer>
         </main>
       </div>
     </BrowserRouter>
@@ -228,6 +220,11 @@ function Live() {
     [busy, setBusy] = useState(false),
     [error, setError] = useState("");
   const last = turns.at(-1)?.response;
+  const messagesRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = messagesRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [turns]);
   async function start() {
     setBusy(true);
     setError("");
@@ -260,9 +257,9 @@ function Live() {
   return (
     <>
       <Heading
-        eyebrow="AT THE COUNTER"
-        title="The negotiation desk."
-        description="A place to make a deal, and understand every offer behind it."
+        eyebrow="SELLER WORKSPACE"
+        title="Let’s make a better deal."
+        description="Start a buyer conversation. Keep every offer fair, transparent and within policy."
       />
       <div className="toolbar card">
         <label>
@@ -284,8 +281,8 @@ function Live() {
             disabled={!!session && !last?.closed}
             onChange={(e) => setBrain(e.target.value)}
           >
-            <option value="ladder">Commitment ladder</option>
-            <option value="baseline">Measured baseline</option>
+            <option value="ladder">Ladder pricing</option>
+            <option value="baseline">Baseline</option>
           </select>
         </label>
         <label>
@@ -313,34 +310,34 @@ function Live() {
         <section className="card conversation">
           <div className="card-head">
             <div>
-              <h2>The conversation</h2>
-              <span className="muted">Buyer &amp; shopkeeper</span>
+              <h2>
+                <span className="chat-avatar">m</span> Live negotiation
+              </h2>
+              <span className="muted">
+                Your buyer and Munim, in one conversation
+              </span>
             </div>
             <Badge tone="green">
               {last?.closed ? "CLOSED" : session ? "IN CONVERSATION" : "READY"}
             </Badge>
           </div>
-          <div className="messages" aria-live="polite">
+          <div className="messages" aria-live="polite" ref={messagesRef}>
             {!turns.length ? (
               <div className="welcome">
-                <div className="receipt-illustration" aria-hidden="true">
-                  <ReceiptText size={30} strokeWidth={1} />
-                  <span>MUNIM / OFFER NOTE</span>
-                  <i />
-                  <i />
-                  <div>
-                    <span>YOUR NEXT DEAL</span>
-                    <ArrowUpRight size={18} />
-                  </div>
+                <div className="welcome-symbol" aria-hidden="true">
+                  <MessagesSquare size={42} strokeWidth={1.5} />
                 </div>
-                <h3>Pull up a chair.</h3>
+                <h3>Ready when you are.</h3>
                 <p>
-                  Choose your buyer and start a conversation.
+                  Choose a buyer and select <strong>New negotiation</strong>.
                   <br />
-                  Munim will take it from here.
+                  You can also step in and send your own offers.
                 </p>
+                <NavLink className="catalogue-link" to="/shop">
+                  Explore the shop <ArrowRight size={16} />
+                </NavLink>
                 <div className="example-message">
-                  <span>TRY SAYING</span>
+                  <span>Example</span>
                   <code>g01 x1; competitor Rs 1</code>
                   <CornerDownLeft size={14} />
                 </div>
@@ -412,7 +409,7 @@ function Live() {
         </section>
         <section className="card mind">
           <div className="card-head">
-            <h2>Behind the offer</h2>
+            <h2>Offer insights</h2>
             <ShieldCheck size={18} strokeWidth={1.5} />
           </div>
           <div className="mind-step">
@@ -568,8 +565,8 @@ function Replay() {
   return (
     <>
       <Heading
-        eyebrow="THE SAME DEAL, TWICE"
-        title="Take away the pressure."
+        eyebrow="REPLAY & VERIFY"
+        title="Same needs. Same offer."
         description="Same commitments. Same offers. Compare the original conversation with its claims-deleted replay."
       />
       <div className="proof card">
@@ -649,8 +646,8 @@ function Results() {
   return (
     <>
       <Heading
-        eyebrow="THE EVIDENCE"
-        title="Numbers, with nothing to hide."
+        eyebrow="ARENA ANALYTICS"
+        title="Performance, at a glance."
         description="Two strategies. Six buyer personas. Saved, reproducible evidence — with the limits in plain sight."
       />
       <div className="notice">
@@ -689,8 +686,8 @@ function Results() {
             <YAxis domain={[0, 100]} />
             <Tooltip />
             <Legend verticalAlign="top" />
-            <Bar dataKey="ladder" fill="#285446" radius={[2, 2, 0, 0]} />
-            <Bar dataKey="baseline" fill="#BB784F" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="ladder" fill="#d95113" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="baseline" fill="#344256" radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -736,19 +733,42 @@ function Results() {
     </>
   );
 }
+function ProductVisual({ category }: { category: string }) {
+  const iconMap: Record<string, typeof Wheat> = {
+    Grains: Wheat,
+    Pulses: ShoppingBasket,
+    Oils: Droplets,
+    Pantry: Package,
+    Beverages: Coffee,
+    Snacks: Cookie,
+    Care: Store,
+  };
+  const Icon = iconMap[category] || Package;
+  return (
+    <div
+      className={"product-visual category-" + category.toLowerCase()}
+      aria-hidden="true"
+    >
+      <Icon size={48} strokeWidth={1.3} />
+    </div>
+  );
+}
 function Shop() {
   const { data, error } = useData("catalogue");
   const [owner, setOwner] = useState(false),
-    [query, setQuery] = useState("");
+    [query, setQuery] = useState(""),
+    [category, setCategory] = useState("All items");
   if (!data) return <Empty error={error} />;
-  const items = data.items.filter((i: Data) =>
-    (i.name + i.category + i.id).toLowerCase().includes(query.toLowerCase()),
+  const items = data.items.filter(
+    (i: Data) =>
+      (category === "All items" || i.category === category) &&
+      (i.name + i.category + i.id).toLowerCase().includes(query.toLowerCase()),
   );
   return (
     <>
       <Heading
-        eyebrow="ON THE SHELVES"
-        title="The everyday essentials."
+        eyebrow="PRODUCT CATALOGUE"
+        title="Everything your shop sells."
         description="A kirana catalogue built for the demonstration. Every offer is grounded in these records."
       />
       <div className="shop-tools">
@@ -770,10 +790,32 @@ function Shop() {
           Shopkeeper view · costs & floors
         </label>
       </div>
+      <div className="category-filters" aria-label="Product categories">
+        {[
+          "All items",
+          ...Array.from(
+            new Set<string>(data.items.map((i: Data) => i.category)),
+          ),
+        ].map((c) => (
+          <button
+            className={category === c ? "selected" : ""}
+            aria-pressed={category === c}
+            key={c}
+            onClick={() => setCategory(c)}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+      <div className="catalogue-meta">
+        <span>{items.length} products</span>
+        <span>{data.source} catalogue · Prices in INR</span>
+      </div>
       <div className="catalogue">
         {items.map((i: Data) => (
           <div className="card product" key={i.id}>
-            <div>
+            <ProductVisual category={i.category} />
+            <div className="product-meta">
               <Badge>{i.category}</Badge>
               <span className="muted">{i.id}</span>
             </div>
@@ -814,8 +856,8 @@ function Khata() {
   return (
     <>
       <Heading
-        eyebrow="IN THE BOOKS"
-        title="Good business, written down."
+        eyebrow="KHATA LEDGER"
+        title="Your business, on record."
         description="Closed deals from the saved arena. A transparent record of the agreement, without the noise."
       />
       <div className="stats">
@@ -889,8 +931,8 @@ function MoreCharts({ data }: { data: Data }) {
               <YAxis />
               <Tooltip />
               <Legend verticalAlign="top" />
-              <Bar dataKey="ladder" fill="#285446" />
-              <Bar dataKey="baseline" fill="#BB784F" />
+              <Bar dataKey="ladder" fill="#d95113" />
+              <Bar dataKey="baseline" fill="#344256" />
             </BarChart>
           </ResponsiveContainer>
         </div>

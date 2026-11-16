@@ -10,7 +10,7 @@ def main():
         page=browser.new_page(viewport={'width':1440,'height':900},device_scale_factor=1)
         page.on('pageerror',lambda e:report['console_errors'].append(str(e)))
         page.on('console',lambda e:report['console_errors'].append(e.text) if e.type=='error' else None)
-        page.goto('http://127.0.0.1:8000'); page.get_by_role('heading',name='The negotiation desk.').wait_for()
+        page.goto('http://127.0.0.1:8000'); page.get_by_role('heading',name='Let’s make a better deal.').wait_for()
         for persona in ['cooperative','hard bargainer','manipulator','prompt-injector','bundle seeker','confused']:
             page.get_by_label('Buyer persona').select_option(persona)
             page.get_by_role('button',name='New negotiation').click()
@@ -28,6 +28,15 @@ def main():
                 if response['response']['closed']: break
             assert response['response']['closed'],persona
             report['personas'].append({'persona':persona,'terminal':response['response']['move']['kind'],'turns':response['response']['round']})
+        page.goto('http://127.0.0.1:8000/shop'); page.wait_for_load_state('networkidle')
+        catalogue=page.request.get('http://127.0.0.1:8000/api/catalogue').json()['items']
+        page.get_by_role('button',name='Grains',exact=True).click()
+        assert page.locator('.product').count()==sum(i['category']=='Grains' for i in catalogue)
+        page.get_by_label('Find an item').fill('atta')
+        assert page.locator('.product').count()==1
+        page.get_by_label('Shopkeeper view').check()
+        assert page.locator('.private').is_visible()
+        report['catalogue_filter_search_and_private_view']='PASS'
         for width,height in [(1440,900),(390,844),(360,800)]:
             page.set_viewport_size({'width':width,'height':height})
             for path in ['/','/replay','/results','/shop','/khata']:

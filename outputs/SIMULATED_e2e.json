@@ -110,5 +110,6 @@
     }
   ],
   "console_errors": [],
-  "overflow": []
+  "overflow": [],
+  "catalogue_filter_search_and_private_view": "PASS"
 }
