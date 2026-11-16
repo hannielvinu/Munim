@@ -10,7 +10,7 @@ def main():
         page=browser.new_page(viewport={'width':1440,'height':900},device_scale_factor=1)
         page.on('pageerror',lambda e:report['console_errors'].append(str(e)))
         page.on('console',lambda e:report['console_errors'].append(e.text) if e.type=='error' else None)
-        page.goto('http://127.0.0.1:8000'); page.get_by_role('heading',name='A good deal. On fair terms.').wait_for()
+        page.goto('http://127.0.0.1:8000'); page.get_by_role('heading',name='The negotiation desk.').wait_for()
         for persona in ['cooperative','hard bargainer','manipulator','prompt-injector','bundle seeker','confused']:
             page.get_by_label('Buyer persona').select_option(persona)
             page.get_by_role('button',name='New negotiation').click()
@@ -20,6 +20,11 @@ def main():
                 if button.is_disabled(): break
                 with page.expect_response(lambda r:'/turn' in r.url and r.request.method=='POST') as info: button.click()
                 response=info.value.json()
+                if persona=='manipulator' and turn==1:
+                    page.wait_for_timeout(250)
+                    page.evaluate('window.scrollTo(0,0)')
+                    page.locator('.messages').evaluate('(e)=>e.scrollTop=e.scrollHeight')
+                    page.screenshot(path=str(dest/'SIMULATED_live_active_1440.png'),full_page=True)
                 if response['response']['closed']: break
             assert response['response']['closed'],persona
             report['personas'].append({'persona':persona,'terminal':response['response']['move']['kind'],'turns':response['response']['round']})

@@ -1,30 +1,905 @@
-import React,{useEffect,useState} from 'react';
-import {createRoot} from 'react-dom/client';
-import {BrowserRouter,NavLink,Routes,Route,useLocation} from 'react-router-dom';
-import {motion} from 'framer-motion';
-import {BarChart,Bar,XAxis,YAxis,Tooltip,ResponsiveContainer,Legend} from 'recharts';
-import '@fontsource/fraunces/600.css'; import '@fontsource/inter/400.css'; import '@fontsource/inter/500.css'; import '@fontsource/inter/600.css'; import '@fontsource/noto-sans-devanagari/400.css'; import './style.css';
-type Data=any;
-const money=(n:number)=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR'}).format(n/100);
-const pct=(n:number)=>(n*100).toFixed(1)+'%';
-async function api(path:string,body?:Data){const r=await fetch('/api/'+path,body!==undefined?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{});const data=await r.json();if(!r.ok)throw Error(data.detail||'Request failed');return data;}
-const pageCache=new Map<string,Data>(); ['results','replays','catalogue','khata'].forEach(path=>{api(path).then(d=>pageCache.set(path,d)).catch(()=>{});});
-function ScrollTop(){const location=useLocation();useEffect(()=>{window.scrollTo(0,0)},[location.pathname]);return null;}
-function useData(path:string){const [data,set]=useState<Data>(pageCache.get(path)||null),[error,err]=useState('');useEffect(()=>{api(path).then(d=>{pageCache.set(path,d);set(d)}).catch(e=>err(e.message));},[path]);return {data,error};}
-const personas=['cooperative','hard bargainer','manipulator','prompt-injector','bundle seeker','confused'];
-function Badge({children,tone=''}:{children:React.ReactNode,tone?:string}){return <span className={'badge '+tone}>{children}</span>}
-function Empty({error}:{error?:string}){return <div className="card empty" role="status">{error||'Opening the ledger…'}</div>}
-function Heading({eyebrow,title,description}:{eyebrow:string,title:string,description:string}){return <header className="heading"><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{description}</p></header>}
-function App(){const {data}=useData('results');return <BrowserRouter><ScrollTop/><div className="app"><aside className="sidebar"><NavLink className="brand" to="/"><span className="brand-icon">म</span><span>Munim<small>THE DIGITAL KHATA</small></span></NavLink><div className="nav-label">YOUR SHOP, IN GOOD HANDS</div><nav aria-label="Main navigation">{[['/','Live negotiation','◉'],['/replay','Claim replay','⇄'],['/results','Arena results','▥'],['/shop','The shop','▦'],['/khata','Khata ledger','≡']].map(([to,label,icon])=><NavLink end={to==='/'} key={to} to={to}><span aria-hidden="true">{icon}</span>{label}</NavLink>)}</nav><div className="sidebar-note"><span className="tiny-leaf">✳</span><p>Fair prices.<br/>Firm boundaries.</p><small>Cheap talk is free.<br/>Commitments are priced.</small></div><footer>HyperNova<br/><small>TM-394CDC172A3</small></footer></aside><main><div className="topbar"><span>THE SHOPKEEPER'S WORKSPACE</span><Badge tone="amber">{data?.source||'SIMULATED'} · {data?.mode||'OFFLINE'} · {data?.rezolve||'MOCK'}</Badge></div><Routes><Route path="/" element={<Live/>}/><Route path="/replay" element={<Replay/>}/><Route path="/results" element={<Results/>}/><Route path="/shop" element={<Shop/>}/><Route path="/khata" element={<Khata/>}/></Routes><div className="bottom-note">A research demonstration. Simulated shop data, no payments or inventory reservations.</div></main></div></BrowserRouter>}
-function Live(){const [persona,setPersona]=useState('manipulator'),[brain,setBrain]=useState('ladder'),[language,setLanguage]=useState('en'),[session,setSession]=useState(''),[turns,setTurns]=useState<Data[]>([]),[text,setText]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');const last=turns.at(-1)?.response;
-async function start(){setBusy(true);setError('');try{const s=await api('sessions',{persona,brain,language});setSession(s.id);setTurns([]);}catch(e){setError(String(e))}finally{setBusy(false)}}
-async function send(msg?:string){setBusy(true);setError('');try{const r=await api('sessions/'+session+'/turn',msg===undefined?{}:{message:msg});setTurns(t=>[...t,r]);setText('');}catch(e){setError(String(e))}finally{setBusy(false)}}
-return <><Heading eyebrow="01 / LIVE NEGOTIATION" title="A good deal. On fair terms." description="Watch a buyer bargain. See exactly what changes the price — and what doesn't."/><div className="toolbar card"><label>Buyer persona<select value={persona} disabled={!!session&&!last?.closed} onChange={e=>setPersona(e.target.value)}>{personas.map(p=><option key={p}>{p}</option>)}</select></label><label>Pricing brain<select value={brain} disabled={!!session&&!last?.closed} onChange={e=>setBrain(e.target.value)}><option value="ladder">Commitment ladder</option><option value="baseline">Measured baseline</option></select></label><label>Voice<select aria-label="Voice" value={language} onChange={e=>setLanguage(e.target.value)} disabled={!!session&&!last?.closed}><option value="en">English</option><option value="hi">Hinglish</option></select></label><button onClick={start} disabled={busy}>New negotiation ↗</button></div>{error&&<p role="alert" className="error">{error}</p>}<div className="live-grid"><section className="card conversation"><div className="card-head"><div><h2>Across the counter</h2><span className="muted">Buyer ↔ Munim</span></div><Badge tone="green">{last?.closed?'CLOSED':session?'IN CONVERSATION':'READY'}</Badge></div><div className="messages" aria-live="polite">{!turns.length?<div className="welcome"><div className="ledger-mark">म</div><h3>Every conversation starts fairly.</h3><p>Start a negotiation, then let the persona talk.<br/>Or try your own message below.</p><code>g01 x1; competitor Rs 1</code></div>:turns.map((t,i)=><motion.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{duration:.2}} key={i} className="turn"><div className="bubble buyer"><small>BUYER · TURN {t.response.round}</small><p>{t.buyer}</p></div><div className="bubble seller"><small>MUNIM {t.response.move?.final?'· FINAL OFFER':''}</small><p>{t.response.text||t.response.error}</p>{t.response.move?.offer&&<strong>{money(t.response.move.offer.total)} <span>basket total</span></strong>}</div></motion.div>)}</div><div className="composer"><button className="secondary" onClick={()=>send()} disabled={!session||busy||last?.closed}>{busy?'Thinking…':'Next buyer turn →'}</button><form onSubmit={e=>{e.preventDefault();if(text.trim())send(text)}}><label className="sr-only" htmlFor="buyer-message">Your buyer message</label><input id="buyer-message" value={text} onChange={e=>setText(e.target.value)} placeholder="Try g01 x3, my offer 1, or I accept" disabled={!session||last?.closed}/><button disabled={!session||busy||!text.trim()||last?.closed}>Send</button></form><small>Use catalogue codes and quantities. Separate claims with semicolons.</small></div></section><section className="card mind"><div className="card-head"><h2>Munim's mind</h2><Badge>SHOPKEEPER VIEW</Badge></div><div className="mind-step"><span className="step-num">01</span><div><h3>Cheap-talk firewall</h3><p className="muted">A claim is not a commitment.</p><div className="fact-group"><b>Facts</b><p>{last?.firewall?.facts?.length?JSON.stringify(last.firewall.facts):'No catalogue facts claimed'}</p></div><div className="commit-group"><b>Commitments</b><p>{last?.firewall?.commitments?.needs&&Object.keys(last.firewall.commitments.needs).length?Object.entries(last.firewall.commitments.needs).map(([k,v])=>k+' × '+v).join(' · '):'Waiting for a basket'}</p></div><div className="pressure-group"><b>Pressure</b>{last?.firewall?.pressure?.length?last.firewall.pressure.map((p:string)=><p key={p}><s>{p}</s><small>ignored, cheap talk</small></p>):<p>Nothing to filter this turn</p>}</div></div></div><div className="mind-step"><span className="step-num">02</span><div><h3>{brain==='ladder'?'Commitment ladder':'Deadline baseline'}</h3><div className="rungs">{['1 unit','3+ units','6+ units','Bundle'].map((r,i)=><span key={r} className={last?.move?.offer&&(i===((last.move.offer.lines.length>1)?3:last.move.offer.lines[0].qty>=6?2:last.move.offer.lines[0].qty>=3?1:0))?'active':''}>{r}</span>)}</div><p className="muted">{last?.move?.hint||'More commitment unlocks the next rung.'}</p></div></div><div className="mind-step"><span className="step-num">03</span><div><h3>Policy gate <span className="green">{last?.gate?'✓ PASS':'—'}</span></h3><p className="muted">{last?.gate?'Floor check passed · Stock check passed':'Every line must pass before sending.'}</p>{last?.counter_check&&!last.counter_check.ok&&<p className="error">Buyer counter blocked: {last.counter_check.reasons.join(', ')}</p>}</div></div><div className="mind-step"><span className="step-num">04</span><div><h3>Claim verification <Badge tone="amber">{last?.trace?.mode||'MOCK'}</Badge></h3><p className="muted">{last?.trace?.ok?'✓ Verified against local lookup evidence':'Evidence is checked before every message.'}</p><details><summary>View retrieval & trace evidence</summary><pre>{JSON.stringify(last?.trace?.evidence||[],null,2)}</pre></details></div></div><div className="margin"><div><span>Basket gross margin</span><strong>{last?.margin_paise!==undefined?money(last.margin_paise):'—'}</strong></div><meter min="0" max="100" value={last?.margin_pct||0} aria-label="Gross margin percentage"/><small>Private diagnostics · never shared with the buyer</small></div></section></div></>}
-function Replay(){const {data,error}=useData('replays');const [id,setId]=useState('');if(!data)return <Empty error={error}/>;const r=data.replays.find((x:Data)=>x.id===id)||data.replays[0];return <><Heading eyebrow="02 / CLAIM-INVARIANCE REPLAY" title="Take away the pressure." description="Same commitments. Same offers. Compare the original conversation with its claims-deleted replay."/><div className="proof card"><span className="proof-icon">⇄</span><div><div className="eyebrow">MEASURED · {data.source}</div><h2>Offers identical: {data.identical_pct}%</h2><p>{data.offers_compared} turn-by-turn comparisons across {data.negotiations} adversarial negotiations.</p></div><Badge tone="green">REPLAY VERIFIED</Badge></div><label className="select-row">Negotiation<select value={r.id} onChange={e=>setId(e.target.value)}>{data.replays.map((x:Data)=><option key={x.id} value={x.id}>{x.id} · {x.persona}</option>)}</select></label><div className="replay-head"><h2>Original · pressure included</h2><h2>Replay · pressure removed</h2></div>{r.rows.map((row:Data,i:number)=><div className="replay-row" key={i}>{['original','replayed'].map((side,j)=><div className="card" key={side}><div className="eyebrow">TURN {i+1} · {j?'CLEAN COMMITMENT':'ORIGINAL BUYER'}</div><p>{j?row.clean_buyer:row.original_buyer}</p><div className="offer-row"><strong>{row[side]?.offer?money(row[side].offer.total):row[side]?.kind}</strong><Badge tone="green">{row.identical?'IDENTICAL':'DIFFERENT'}</Badge></div><code>{row[side]?.offer?.lines.map((l:Data)=>l.item+' × '+l.qty+' @ '+money(l.unit_price)).join(' / ')}</code></div>)}</div>)}</>}
-function Results(){const {data,error}=useData('results');if(!data)return <Empty error={error}/>;const best=data.brains[data.selected_brain];const chart=personas.map(p=>({name:p,...Object.fromEntries(['ladder','baseline'].map(b=>[b,+(data.brains[b].personas[p].deal_rate*100).toFixed(1)]))}));return <><Heading eyebrow="03 / THE ARENA" title="Let the ledger speak." description="Two strategies. Six buyer personas. Saved, reproducible evidence — with the limits in plain sight."/><div className="notice">{data.source} stand-in data · {data.mode} buyers · {data.total_negotiations} negotiations · seed {data.seed}. These are not official challenge results.</div><div className="stats">{[['Deals closed',pct(best.deal_rate)],['Margin kept',pct(best.margin_kept)],['Policy violations',best.policy_violations],['Truthful messages',pct(best.truthfulness)]].map(([label,value])=><div className="card stat" key={label}><span>{label}</span><strong>{value}</strong><small>{data.selected_brain} · measured</small></div>)}</div><div className="card chart"><div className="card-head"><h2>Deals closed, by buyer persona</h2><Badge>PERCENT</Badge></div><ResponsiveContainer width="100%" height={300}><BarChart data={chart} margin={{bottom:36,right:16}}><XAxis dataKey="name" interval={0} angle={-18} textAnchor="end" tick={{fontSize:12}}/><YAxis domain={[0,100]}/><Tooltip/><Legend verticalAlign="top"/><Bar dataKey="ladder" fill="#2F3E9E" radius={[4,4,0,0]}/><Bar dataKey="baseline" fill="#E8891D" radius={[4,4,0,0]}/></BarChart></ResponsiveContainer></div><MoreCharts data={data}/><div className="two-col">{Object.entries(data.brains).map(([b,m]:[string,any])=><div className="card padded" key={b}><h2>{b==='ladder'?'Commitment ladder':'Deadline baseline'} {b===data.selected_brain&&<Badge tone="green">SELECTED</Badge>}</h2><dl>{[['Score',m.score.toFixed(4)],['Average rounds',m.average_rounds.toFixed(2)],['Deadlocks',pct(m.deadlock_rate)],['Model tokens / negotiation',m.tokens_per_negotiation],['Model rupees / negotiation',m.rupees_per_negotiation===null?'NOT MEASURED':'₹'+m.rupees_per_negotiation]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl><p className="muted">Round distribution: {Object.entries(m.rounds_distribution).filter(([,n])=>n).map(([r,n])=>r+' turns: '+n).join(' · ')}</p></div>)}</div></>}
-function Shop(){const {data,error}=useData('catalogue');const [owner,setOwner]=useState(false),[query,setQuery]=useState('');if(!data)return <Empty error={error}/>;const items=data.items.filter((i:Data)=>(i.name+i.category+i.id).toLowerCase().includes(query.toLowerCase()));return <><Heading eyebrow="04 / THE SHOP" title="Everyday essentials. Clear terms." description="A kirana catalogue built for the demonstration. Every offer is grounded in these records."/><div className="shop-tools"><label>Find an item<input type="search" placeholder="Search atta, soap, g01…" value={query} onChange={e=>setQuery(e.target.value)}/></label><label className="toggle"><input type="checkbox" checked={owner} onChange={e=>setOwner(e.target.checked)}/> Shopkeeper view · costs & floors</label></div><div className="catalogue">{items.map((i:Data)=><div className="card product" key={i.id}><div><Badge>{i.category}</Badge><span className="muted">{i.id}</span></div><h2>{i.name}</h2><strong>{money(i.list_price)}</strong><p className={i.stock?'muted':'error'}>{i.stock?i.stock+' units in catalogue':'Out of stock'}</p>{owner&&<div className="private">Cost {money(i.cost)} · Floor {money(i.floor)}</div>}</div>)}</div>{!items.length&&<Empty error="No matching items. Try another name or code."/>}<div className="card padded"><h2>The agent's promise</h2><p>Can negotiate eligible quantities and bundles within policy. Cannot sell below floor, sell unavailable stock, add fees or invent claims. Pressure never qualifies a basket for a better ladder rung.</p><p className="muted">SIMULATED policy: minimum markup on cost and maximum discount against list price. Stock is independent per negotiation.</p></div></>}
-function Khata(){const {data,error}=useData('khata');if(!data)return <Empty error={error}/>;return <><Heading eyebrow="05 / THE KHATA" title="Good business, written down." description="Closed deals from the saved arena. A transparent record of the agreement, without the noise."/><div className="stats">{Object.entries(data.tricks).map(([k,v]:[string,any])=><div className="card stat" key={k}><span>{k} resisted</span><strong>{v}</strong><small>Cumulative local ledger</small></div>)}</div><p className="muted">{data.scope}</p><div className="card ledger"><div className="ledger-row header"><span>Negotiation</span><span>Buyer</span><span>Brain</span><span>Deal total</span></div>{data.deals.slice(0,60).map((d:Data)=><div className="ledger-row" key={d.id}><span>{d.id}</span><span>{d.persona}</span><span>{d.brain}</span><strong>{money(d.offer.total)}</strong></div>)}</div><p className="muted">Showing the first {Math.min(60,data.deals.length)} of {data.deals.length} saved closed deals.</p></>}
+import React, { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  BrowserRouter,
+  NavLink,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from "recharts";
+import "@fontsource/instrument-serif/400.css";
+import "@fontsource/instrument-serif/400-italic.css";
+import "@fontsource/manrope/400.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
+import "@fontsource/manrope/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import {
+  MessagesSquare,
+  GitCompareArrows,
+  ChartNoAxesCombined,
+  Store,
+  BookOpen,
+  ArrowUpRight,
+  ArrowRight,
+  ShieldCheck,
+  ReceiptText,
+  CornerDownLeft,
+} from "lucide-react";
+import "@fontsource/noto-sans-devanagari/400.css";
+import "./style.css";
+type Data = any;
+const money = (n: number) =>
+  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(
+    n / 100,
+  );
+const pct = (n: number) => (n * 100).toFixed(1) + "%";
+async function api(path: string, body?: Data) {
+  const r = await fetch(
+    "/api/" + path,
+    body !== undefined
+      ? {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      : {},
+  );
+  const data = await r.json();
+  if (!r.ok) throw Error(data.detail || "Request failed");
+  return data;
+}
+const pageCache = new Map<string, Data>();
+["results", "replays", "catalogue", "khata"].forEach((path) => {
+  api(path)
+    .then((d) => pageCache.set(path, d))
+    .catch(() => {});
+});
+function ScrollTop() {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  return null;
+}
+function useData(path: string) {
+  const [data, set] = useState<Data>(pageCache.get(path) || null),
+    [error, err] = useState("");
+  useEffect(() => {
+    api(path)
+      .then((d) => {
+        pageCache.set(path, d);
+        set(d);
+      })
+      .catch((e) => err(e.message));
+  }, [path]);
+  return { data, error };
+}
+const personas = [
+  "cooperative",
+  "hard bargainer",
+  "manipulator",
+  "prompt-injector",
+  "bundle seeker",
+  "confused",
+];
+function Badge({
+  children,
+  tone = "",
+}: {
+  children: React.ReactNode;
+  tone?: string;
+}) {
+  return <span className={"badge " + tone}>{children}</span>;
+}
+function Empty({ error }: { error?: string }) {
+  return (
+    <div className="card empty" role="status">
+      {error || "Opening the ledger…"}
+    </div>
+  );
+}
+function Heading({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <header className="heading">
+      <div className="eyebrow">{eyebrow}</div>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </header>
+  );
+}
+const navigation = [
+  { to: "/", label: "Live negotiation", icon: MessagesSquare },
+  { to: "/replay", label: "Claim replay", icon: GitCompareArrows },
+  { to: "/results", label: "Arena results", icon: ChartNoAxesCombined },
+  { to: "/shop", label: "The shop", icon: Store },
+  { to: "/khata", label: "Khata ledger", icon: BookOpen },
+];
+function WorkspaceBar({ data }: { data: Data }) {
+  const { pathname } = useLocation();
+  const page = navigation.find((n) => n.to === pathname);
+  return (
+    <div className="topbar">
+      <div className="breadcrumb">
+        Workspace <span>/</span>
+        <strong>{page?.label}</strong>
+      </div>
+      <div className="environment">
+        <span className="status-dot" />
+        {data?.source || "SIMULATED"}
+        <span className="environment-detail">
+          {" "}
+          · {data?.mode || "OFFLINE"} · {data?.rezolve || "MOCK"}
+        </span>
+      </div>
+    </div>
+  );
+}
+function App() {
+  const { data } = useData("results");
+  return (
+    <BrowserRouter>
+      <ScrollTop />
+      <div className="app">
+        <aside className="sidebar">
+          <NavLink className="brand" to="/">
+            <span className="brand-icon">म</span>
+            <span>
+              munim<span className="brand-period">.</span>
+              <small>A SHOPKEEPER'S COMPANION</small>
+            </span>
+          </NavLink>
+          <div className="nav-label">WORKSPACE</div>
+          <nav aria-label="Main navigation">
+            {navigation.map(({ to, label, icon: Icon }) => (
+              <NavLink end={to === "/"} key={to} to={to}>
+                <Icon size={18} strokeWidth={1.5} />
+                <span>{label}</span>
+                <ArrowUpRight className="nav-arrow" size={14} />
+              </NavLink>
+            ))}
+          </nav>
+          <div className="sidebar-note">
+            <div className="notebook-lines" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <p>
+              Good business.
+              <br />
+              <em>Clear accounts.</em>
+            </p>
+            <small>
+              A little less guesswork.
+              <br />A little more trust.
+            </small>
+          </div>
+          <footer>
+            <span className="team-avatar">HN</span>
+            <div>
+              HyperNova<small>TM-394CDC172A3</small>
+            </div>
+          </footer>
+        </aside>
+        <main>
+          <WorkspaceBar data={data} />
+          <Routes>
+            <Route path="/" element={<Live />} />
+            <Route path="/replay" element={<Replay />} />
+            <Route path="/results" element={<Results />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/khata" element={<Khata />} />
+          </Routes>
+          <div className="bottom-note">
+            <span>Built for the everyday shopkeeper.</span>
+            <span>Simulated shop · no payments or inventory reservations</span>
+          </div>
+        </main>
+      </div>
+    </BrowserRouter>
+  );
+}
+function Live() {
+  const [persona, setPersona] = useState("manipulator"),
+    [brain, setBrain] = useState("ladder"),
+    [language, setLanguage] = useState("en"),
+    [session, setSession] = useState(""),
+    [turns, setTurns] = useState<Data[]>([]),
+    [text, setText] = useState(""),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState("");
+  const last = turns.at(-1)?.response;
+  async function start() {
+    setBusy(true);
+    setError("");
+    try {
+      const s = await api("sessions", { persona, brain, language });
+      setSession(s.id);
+      setTurns([]);
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function send(msg?: string) {
+    setBusy(true);
+    setError("");
+    try {
+      const r = await api(
+        "sessions/" + session + "/turn",
+        msg === undefined ? {} : { message: msg },
+      );
+      setTurns((t) => [...t, r]);
+      setText("");
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <>
+      <Heading
+        eyebrow="AT THE COUNTER"
+        title="The negotiation desk."
+        description="A place to make a deal, and understand every offer behind it."
+      />
+      <div className="toolbar card">
+        <label>
+          Buyer persona
+          <select
+            value={persona}
+            disabled={!!session && !last?.closed}
+            onChange={(e) => setPersona(e.target.value)}
+          >
+            {personas.map((p) => (
+              <option key={p}>{p}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Pricing brain
+          <select
+            value={brain}
+            disabled={!!session && !last?.closed}
+            onChange={(e) => setBrain(e.target.value)}
+          >
+            <option value="ladder">Commitment ladder</option>
+            <option value="baseline">Measured baseline</option>
+          </select>
+        </label>
+        <label>
+          Voice
+          <select
+            aria-label="Voice"
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            disabled={!!session && !last?.closed}
+          >
+            <option value="en">English</option>
+            <option value="hi">Hinglish</option>
+          </select>
+        </label>
+        <button onClick={start} disabled={busy}>
+          New negotiation <ArrowUpRight size={16} />
+        </button>
+      </div>
+      {error && (
+        <p role="alert" className="error">
+          {error}
+        </p>
+      )}
+      <div className="live-grid">
+        <section className="card conversation">
+          <div className="card-head">
+            <div>
+              <h2>The conversation</h2>
+              <span className="muted">Buyer &amp; shopkeeper</span>
+            </div>
+            <Badge tone="green">
+              {last?.closed ? "CLOSED" : session ? "IN CONVERSATION" : "READY"}
+            </Badge>
+          </div>
+          <div className="messages" aria-live="polite">
+            {!turns.length ? (
+              <div className="welcome">
+                <div className="receipt-illustration" aria-hidden="true">
+                  <ReceiptText size={30} strokeWidth={1} />
+                  <span>MUNIM / OFFER NOTE</span>
+                  <i />
+                  <i />
+                  <div>
+                    <span>YOUR NEXT DEAL</span>
+                    <ArrowUpRight size={18} />
+                  </div>
+                </div>
+                <h3>Pull up a chair.</h3>
+                <p>
+                  Choose your buyer and start a conversation.
+                  <br />
+                  Munim will take it from here.
+                </p>
+                <div className="example-message">
+                  <span>TRY SAYING</span>
+                  <code>g01 x1; competitor Rs 1</code>
+                  <CornerDownLeft size={14} />
+                </div>
+              </div>
+            ) : (
+              turns.map((t, i) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  key={i}
+                  className="turn"
+                >
+                  <div className="bubble buyer">
+                    <small>BUYER · TURN {t.response.round}</small>
+                    <p>{t.buyer}</p>
+                  </div>
+                  <div className="bubble seller">
+                    <small>
+                      MUNIM {t.response.move?.final ? "· FINAL OFFER" : ""}
+                    </small>
+                    <p>{t.response.text || t.response.error}</p>
+                    {t.response.move?.offer && (
+                      <strong>
+                        {money(t.response.move.offer.total)}{" "}
+                        <span>basket total</span>
+                      </strong>
+                    )}
+                  </div>
+                </motion.div>
+              ))
+            )}
+          </div>
+          <div className="composer">
+            <button
+              className="secondary"
+              onClick={() => send()}
+              disabled={!session || busy || last?.closed}
+            >
+              {busy ? "Thinking…" : "Next buyer turn →"}
+            </button>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (text.trim()) send(text);
+              }}
+            >
+              <label className="sr-only" htmlFor="buyer-message">
+                Your buyer message
+              </label>
+              <input
+                id="buyer-message"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="Try g01 x3, my offer 1, or I accept"
+                disabled={!session || last?.closed}
+              />
+              <button
+                disabled={!session || busy || !text.trim() || last?.closed}
+              >
+                Send
+              </button>
+            </form>
+            <small>
+              Use catalogue codes and quantities. Separate claims with
+              semicolons.
+            </small>
+          </div>
+        </section>
+        <section className="card mind">
+          <div className="card-head">
+            <h2>Behind the offer</h2>
+            <ShieldCheck size={18} strokeWidth={1.5} />
+          </div>
+          <div className="mind-step">
+            <span className="step-num">01</span>
+            <div>
+              <h3>Cheap-talk firewall</h3>
+              <p className="muted">A claim is not a commitment.</p>
+              <div className="fact-group">
+                <b>Facts</b>
+                <p>
+                  {last?.firewall?.facts?.length
+                    ? last.firewall.facts
+                        .map(
+                          (f: Data) =>
+                            f.item +
+                            " · " +
+                            f.kind +
+                            ": " +
+                            (f.kind === "price"
+                              ? money(f.actual)
+                              : f.actual + " units") +
+                            (f.verified ? " · verified" : " · corrected"),
+                        )
+                        .join(" / ")
+                    : "No facts to verify yet"}
+                </p>
+              </div>
+              <div className="commit-group">
+                <b>Commitments</b>
+                <p>
+                  {last?.firewall?.commitments?.needs &&
+                  Object.keys(last.firewall.commitments.needs).length
+                    ? Object.entries(last.firewall.commitments.needs)
+                        .map(([k, v]) => k + " × " + v)
+                        .join(" · ")
+                    : "No basket committed yet"}
+                </p>
+              </div>
+              <div className="pressure-group">
+                <b>Pressure</b>
+                {last?.firewall?.pressure?.length ? (
+                  last.firewall.pressure.map((p: string) => (
+                    <p key={p}>
+                      <s>{p}</s>
+                      <small>ignored, cheap talk</small>
+                    </p>
+                  ))
+                ) : (
+                  <p>No pressure detected</p>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="mind-step">
+            <span className="step-num">02</span>
+            <div>
+              <h3>
+                {brain === "ladder" ? "Commitment ladder" : "Deadline baseline"}
+              </h3>
+              <div className="rungs">
+                {["1 unit", "3+ units", "6+ units", "Bundle"].map((r, i) => (
+                  <span
+                    key={r}
+                    className={
+                      last?.move?.offer &&
+                      i ===
+                        (last.move.offer.lines.length > 1
+                          ? 3
+                          : last.move.offer.lines[0].qty >= 6
+                            ? 2
+                            : last.move.offer.lines[0].qty >= 3
+                              ? 1
+                              : 0)
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    {r}
+                  </span>
+                ))}
+              </div>
+              <p className="muted">
+                {last?.move?.hint || "More commitment unlocks the next rung."}
+              </p>
+            </div>
+          </div>
+          <div className="mind-step">
+            <span className="step-num">03</span>
+            <div>
+              <h3>
+                Policy gate{" "}
+                <span className="green">{last?.gate ? "✓ PASS" : "—"}</span>
+              </h3>
+              <p className="muted">
+                {last?.gate
+                  ? "Floor check passed · Stock check passed"
+                  : "Every line must pass before sending."}
+              </p>
+              {last?.counter_check && !last.counter_check.ok && (
+                <p className="error">
+                  Buyer counter blocked: {last.counter_check.reasons.join(", ")}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="mind-step">
+            <span className="step-num">04</span>
+            <div>
+              <h3>
+                Claim verification{" "}
+                <Badge tone="amber">{last?.trace?.mode || "MOCK"}</Badge>
+              </h3>
+              <p className="muted">
+                {last?.trace?.ok
+                  ? "✓ Verified against local lookup evidence"
+                  : "Evidence is checked before every message."}
+              </p>
+              <details>
+                <summary>View retrieval & trace evidence</summary>
+                <pre>
+                  {JSON.stringify(last?.trace?.evidence || [], null, 2)}
+                </pre>
+              </details>
+            </div>
+          </div>
+          <div className="margin">
+            <div>
+              <span>Basket gross margin</span>
+              <strong>
+                {last?.margin_paise !== undefined
+                  ? money(last.margin_paise)
+                  : "—"}
+              </strong>
+            </div>
+            <meter
+              min="0"
+              max="100"
+              value={last?.margin_pct || 0}
+              aria-label="Gross margin percentage"
+            />
+            <small>Private diagnostics · never shared with the buyer</small>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+}
+function Replay() {
+  const { data, error } = useData("replays");
+  const [id, setId] = useState("");
+  if (!data) return <Empty error={error} />;
+  const r = data.replays.find((x: Data) => x.id === id) || data.replays[0];
+  return (
+    <>
+      <Heading
+        eyebrow="THE SAME DEAL, TWICE"
+        title="Take away the pressure."
+        description="Same commitments. Same offers. Compare the original conversation with its claims-deleted replay."
+      />
+      <div className="proof card">
+        <span className="proof-icon">
+          <GitCompareArrows size={36} strokeWidth={1} />
+        </span>
+        <div>
+          <div className="eyebrow">MEASURED · {data.source}</div>
+          <h2>Offers identical: {data.identical_pct}%</h2>
+          <p>
+            {data.offers_compared} turn-by-turn comparisons across{" "}
+            {data.negotiations} adversarial negotiations.
+          </p>
+        </div>
+        <Badge tone="green">REPLAY VERIFIED</Badge>
+      </div>
+      <label className="select-row">
+        Negotiation
+        <select value={r.id} onChange={(e) => setId(e.target.value)}>
+          {data.replays.map((x: Data) => (
+            <option key={x.id} value={x.id}>
+              {x.id} · {x.persona}
+            </option>
+          ))}
+        </select>
+      </label>
+      <div className="replay-head">
+        <h2>Original · pressure included</h2>
+        <h2>Replay · pressure removed</h2>
+      </div>
+      {r.rows.map((row: Data, i: number) => (
+        <div className="replay-row" key={i}>
+          {["original", "replayed"].map((side, j) => (
+            <div className="card" key={side}>
+              <div className="eyebrow">
+                TURN {i + 1} · {j ? "CLEAN COMMITMENT" : "ORIGINAL BUYER"}
+              </div>
+              <p>{j ? row.clean_buyer : row.original_buyer}</p>
+              <div className="offer-row">
+                <strong>
+                  {row[side]?.offer
+                    ? money(row[side].offer.total)
+                    : row[side]?.kind}
+                </strong>
+                <Badge tone="green">
+                  {row.identical ? "IDENTICAL" : "DIFFERENT"}
+                </Badge>
+              </div>
+              <code>
+                {row[side]?.offer?.lines
+                  .map(
+                    (l: Data) =>
+                      l.item + " × " + l.qty + " @ " + money(l.unit_price),
+                  )
+                  .join(" / ")}
+              </code>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+}
+function Results() {
+  const { data, error } = useData("results");
+  if (!data) return <Empty error={error} />;
+  const best = data.brains[data.selected_brain];
+  const chart = personas.map((p) => ({
+    name: p,
+    ...Object.fromEntries(
+      ["ladder", "baseline"].map((b) => [
+        b,
+        +(data.brains[b].personas[p].deal_rate * 100).toFixed(1),
+      ]),
+    ),
+  }));
+  return (
+    <>
+      <Heading
+        eyebrow="THE EVIDENCE"
+        title="Numbers, with nothing to hide."
+        description="Two strategies. Six buyer personas. Saved, reproducible evidence — with the limits in plain sight."
+      />
+      <div className="notice">
+        {data.source} stand-in data · {data.mode} buyers ·{" "}
+        {data.total_negotiations} negotiations · seed {data.seed}. These are not
+        official challenge results.
+      </div>
+      <div className="stats">
+        {[
+          ["Deals closed", pct(best.deal_rate)],
+          ["Margin kept", pct(best.margin_kept)],
+          ["Policy violations", best.policy_violations],
+          ["Truthful messages", pct(best.truthfulness)],
+        ].map(([label, value]) => (
+          <div className="card stat" key={label}>
+            <span>{label}</span>
+            <strong>{value}</strong>
+            <small>{data.selected_brain} · measured</small>
+          </div>
+        ))}
+      </div>
+      <div className="card chart">
+        <div className="card-head">
+          <h2>Deals closed, by buyer persona</h2>
+          <Badge>PERCENT</Badge>
+        </div>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={chart} margin={{ bottom: 36, right: 16 }}>
+            <XAxis
+              dataKey="name"
+              interval={0}
+              angle={-18}
+              textAnchor="end"
+              tick={{ fontSize: 12 }}
+            />
+            <YAxis domain={[0, 100]} />
+            <Tooltip />
+            <Legend verticalAlign="top" />
+            <Bar dataKey="ladder" fill="#285446" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="baseline" fill="#BB784F" radius={[2, 2, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      <MoreCharts data={data} />
+      <div className="two-col">
+        {Object.entries(data.brains).map(([b, m]: [string, any]) => (
+          <div className="card padded" key={b}>
+            <h2>
+              {b === "ladder" ? "Commitment ladder" : "Deadline baseline"}{" "}
+              {b === data.selected_brain && (
+                <Badge tone="green">SELECTED</Badge>
+              )}
+            </h2>
+            <dl>
+              {[
+                ["Score", m.score.toFixed(4)],
+                ["Average rounds", m.average_rounds.toFixed(2)],
+                ["Deadlocks", pct(m.deadlock_rate)],
+                ["Model tokens / negotiation", m.tokens_per_negotiation],
+                [
+                  "Model rupees / negotiation",
+                  m.rupees_per_negotiation === null
+                    ? "NOT MEASURED"
+                    : "₹" + m.rupees_per_negotiation,
+                ],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="muted">
+              Round distribution:{" "}
+              {Object.entries(m.rounds_distribution)
+                .filter(([, n]) => n)
+                .map(([r, n]) => r + " turns: " + n)
+                .join(" · ")}
+            </p>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+function Shop() {
+  const { data, error } = useData("catalogue");
+  const [owner, setOwner] = useState(false),
+    [query, setQuery] = useState("");
+  if (!data) return <Empty error={error} />;
+  const items = data.items.filter((i: Data) =>
+    (i.name + i.category + i.id).toLowerCase().includes(query.toLowerCase()),
+  );
+  return (
+    <>
+      <Heading
+        eyebrow="ON THE SHELVES"
+        title="The everyday essentials."
+        description="A kirana catalogue built for the demonstration. Every offer is grounded in these records."
+      />
+      <div className="shop-tools">
+        <label>
+          Find an item
+          <input
+            type="search"
+            placeholder="Search atta, soap, g01…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </label>
+        <label className="toggle">
+          <input
+            type="checkbox"
+            checked={owner}
+            onChange={(e) => setOwner(e.target.checked)}
+          />{" "}
+          Shopkeeper view · costs & floors
+        </label>
+      </div>
+      <div className="catalogue">
+        {items.map((i: Data) => (
+          <div className="card product" key={i.id}>
+            <div>
+              <Badge>{i.category}</Badge>
+              <span className="muted">{i.id}</span>
+            </div>
+            <h2>{i.name}</h2>
+            <strong>{money(i.list_price)}</strong>
+            <p className={i.stock ? "muted" : "error"}>
+              {i.stock ? i.stock + " units in catalogue" : "Out of stock"}
+            </p>
+            {owner && (
+              <div className="private">
+                Cost {money(i.cost)} · Floor {money(i.floor)}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      {!items.length && (
+        <Empty error="No matching items. Try another name or code." />
+      )}
+      <div className="card padded">
+        <h2>The agent's promise</h2>
+        <p>
+          Can negotiate eligible quantities and bundles within policy. Cannot
+          sell below floor, sell unavailable stock, add fees or invent claims.
+          Pressure never qualifies a basket for a better ladder rung.
+        </p>
+        <p className="muted">
+          SIMULATED policy: minimum markup on cost and maximum discount against
+          list price. Stock is independent per negotiation.
+        </p>
+      </div>
+    </>
+  );
+}
+function Khata() {
+  const { data, error } = useData("khata");
+  if (!data) return <Empty error={error} />;
+  return (
+    <>
+      <Heading
+        eyebrow="IN THE BOOKS"
+        title="Good business, written down."
+        description="Closed deals from the saved arena. A transparent record of the agreement, without the noise."
+      />
+      <div className="stats">
+        {Object.entries(data.tricks).map(([k, v]: [string, any]) => (
+          <div className="card stat" key={k}>
+            <span>{k} resisted</span>
+            <strong>{v}</strong>
+            <small>Cumulative local ledger</small>
+          </div>
+        ))}
+      </div>
+      <p className="muted">{data.scope}</p>
+      <div className="card ledger">
+        <div className="ledger-row header">
+          <span>Negotiation</span>
+          <span>Buyer</span>
+          <span>Brain</span>
+          <span>Deal total</span>
+        </div>
+        {data.deals.slice(0, 60).map((d: Data) => (
+          <div className="ledger-row" key={d.id}>
+            <span>{d.id}</span>
+            <span>{d.persona}</span>
+            <span>{d.brain}</span>
+            <strong>{money(d.offer.total)}</strong>
+          </div>
+        ))}
+      </div>
+      <p className="muted">
+        Showing the first {Math.min(60, data.deals.length)} of{" "}
+        {data.deals.length} saved closed deals.
+      </p>
+    </>
+  );
+}
 
-function MoreCharts({data}:{data:Data}){const margins=personas.map(p=>({name:p,...Object.fromEntries(['ladder','baseline'].map(b=>[b,+(data.brains[b].personas[p].margin_kept*100).toFixed(1)]))}));const rounds=Array.from({length:10},(_,i)=>({name:String(i+1),ladder:data.brains.ladder.rounds_distribution[String(i+1)],baseline:data.brains.baseline.rounds_distribution[String(i+1)]}));return <div className="two-col">{[["Margin retained by persona",margins],["Negotiation rounds",rounds]].map(([title,rows])=><div className="card chart" key={String(title)}><div className="card-head"><h2>{String(title)}</h2></div><ResponsiveContainer width="100%" height={300}><BarChart data={rows as Data[]} margin={{bottom:40,right:16}}><XAxis dataKey="name" interval={0} angle={-20} textAnchor="end" tick={{fontSize:11}}/><YAxis/><Tooltip/><Legend verticalAlign="top"/><Bar dataKey="ladder" fill="#2F3E9E"/><Bar dataKey="baseline" fill="#E8891D"/></BarChart></ResponsiveContainer></div>)}</div>}
-createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
-
+function MoreCharts({ data }: { data: Data }) {
+  const margins = personas.map((p) => ({
+    name: p,
+    ...Object.fromEntries(
+      ["ladder", "baseline"].map((b) => [
+        b,
+        +(data.brains[b].personas[p].margin_kept * 100).toFixed(1),
+      ]),
+    ),
+  }));
+  const rounds = Array.from({ length: 10 }, (_, i) => ({
+    name: String(i + 1),
+    ladder: data.brains.ladder.rounds_distribution[String(i + 1)],
+    baseline: data.brains.baseline.rounds_distribution[String(i + 1)],
+  }));
+  return (
+    <div className="two-col">
+      {[
+        ["Margin retained by persona", margins],
+        ["Negotiation rounds", rounds],
+      ].map(([title, rows]) => (
+        <div className="card chart" key={String(title)}>
+          <div className="card-head">
+            <h2>{String(title)}</h2>
+          </div>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={rows as Data[]} margin={{ bottom: 40, right: 16 }}>
+              <XAxis
+                dataKey="name"
+                interval={0}
+                angle={-20}
+                textAnchor="end"
+                tick={{ fontSize: 11 }}
+              />
+              <YAxis />
+              <Tooltip />
+              <Legend verticalAlign="top" />
+              <Bar dataKey="ladder" fill="#285446" />
+              <Bar dataKey="baseline" fill="#BB784F" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      ))}
+    </div>
+  );
+}
+createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
